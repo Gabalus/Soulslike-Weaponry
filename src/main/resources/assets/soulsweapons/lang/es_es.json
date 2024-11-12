@@ -147,6 +147,7 @@
   "item.soulsweapons.kraken_slayer_crossbow": "Ballesta Matadora de Kraken",
   "item.soulsweapons.darkmoon_longbow": "Arco Largo de Luna Oscura",
   "item.soulsweapons.chungus_staff": "Chungus Staff",
+  "item.soulsweapons.dark_moon_greatsword": "Dark Moon Greatsword",
 
   "item.soulsweapons.big_chungus_spawn_egg": "Huevo de Engendro de Chungus de Tamaño Moderado",
   "item.soulsweapons.withered_demon_spawn_egg": "Huevo de Engendro de Demonio Marchito",
@@ -256,6 +257,7 @@
   "effect.soulsweapons.cooldown": "Enfriamiento",
   "effect.soulsweapons.ghostly": "Fantasmal",
   "effect.soulsweapons.chungus_tonic_effect": "Chungus Tonic",
+  "effect.soulsweapons.frost_moon": "Frost Moon",
 
   "item.minecraft.potion.effect.warding": "Poción de Protección Mágica",
   "item.minecraft.splash_potion.effect.warding": "Poción de Protección Mágica Lanzada",
@@ -653,6 +655,11 @@
   "tooltip.soulsweapons.chungus_infused.5": "- Use on a §fModerately Sized Chungus§r to tame it, making",
   "tooltip.soulsweapons.chungus_infused.6": "it fight for you and your life",
   "tooltip.soulsweapons.chungus_infused.7": "Acquired through chungus bartering",
+  "tooltip.soulsweapons.frost_moon": "Frost Moon",
+  "tooltip.soulsweapons.frost_moon.1": "- Use ability keybind to give yourself §3Frost Moon§r effect,",
+  "tooltip.soulsweapons.frost_moon.2": "making you immune to freezing and powdered snow",
+  "tooltip.soulsweapons.frost_moon.3": "- While having §3Frost Moon§r effect, use the greatsword",
+  "tooltip.soulsweapons.frost_moon.4": "to shoot out §3Moonlight Beams§r that apply §bPermafrost§r",
 
   "tooltip.soulsweapons.lord_soul_purple.part_1": "Una forma rara de almas, que se cree extinta.",
   "tooltip.soulsweapons.lord_soul_purple.part_2": "Su color oscuro pero equilibrado sugiere",

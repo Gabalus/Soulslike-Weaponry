@@ -361,6 +361,17 @@ public class WeaponRecipes {
                 .criterion("has_item", conditionsFromItemPredicates(ItemPredicate.Builder.create()
                         .items(ItemRegistry.ESSENCE_OF_EVENTIDE).build()))
                 .offerTo(consumer);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, WeaponRegistry.DARK_MOON_GREATSWORD)
+                .input('/', ModTags.Items.STICKS)
+                .input('#', ItemRegistry.VERGLAS)
+                .input('0', ItemRegistry.MOONSTONE)
+                .input('L', ModTags.Items.LORD_SOUL)
+                .pattern(" #0")
+                .pattern("#L#")
+                .pattern("/# ")
+                .criterion("has_item", conditionsFromItemPredicates(ItemPredicate.Builder.create()
+                        .tag(ModTags.Items.LORD_SOUL).build()))
+                .offerTo(consumer);
 
         WeaponRecipeProvider.smithingRecipeLordSoulCombat(Ingredient.ofItems(WeaponRegistry.BLOODTHIRSTER), WeaponRegistry.DARKIN_BLADE, consumer);
         WeaponRecipeProvider.smithingRecipeLordSoulCombat(Ingredient.ofItems(Items.GOLDEN_SWORD), WeaponRegistry.DAWNBREAKER, consumer);

@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.EntityTypeTags;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.util.ModTags;
 
@@ -43,5 +44,8 @@ public class EntityTagsProvider extends FabricTagProvider.EntityTypeTagProvider 
                 .add(EntityRegistry.MOONKNIGHT)
                 .add(EntityRegistry.DAY_STALKER)
                 .add(EntityRegistry.NIGHT_PROWLER);
+        this.getOrCreateTagBuilder(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)
+                .add(EntityRegistry.FROST_GIANT)
+                .add(EntityRegistry.RIME_SPECTRE);
     }
 }

@@ -512,6 +512,14 @@ public class WeaponUtil {
                 }
                 tooltip.add(Text.translatable("tooltip.soulsweapons.chungus_infused.7").formatted(Formatting.DARK_GRAY));
             }
+            case FROST_MOON -> {
+                tooltip.add(Text.translatable("tooltip.soulsweapons.frost_moon").formatted(Formatting.WHITE));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.frost_moon.1").formatted(Formatting.GRAY));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.frost_moon.2").formatted(Formatting.GRAY));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.frost_moon.3").formatted(Formatting.GRAY));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.frost_moon.4").formatted(Formatting.GRAY));
+                WeaponUtil.addAbilityTooltip(TooltipAbilities.KEYBIND_ABILITY, stack, tooltip);
+            }
         }
     }
 
@@ -524,6 +532,6 @@ public class WeaponUtil {
         MOONLIGHT_ATTACK, LUNAR_HERALD, SUMMON_GHOST, SHIELD, OBLITERATE, TRIPLE_MOONLIGHT, SHADOW_STEP, DISABLE_HEAL,
         SHARPEN, IS_SHARPENED, DISABLE_DEBUFS, LUMINATE, SPIDERS_BANE, SAWBLADE, WABBAJACK, LUCK_BASED, PARRY, SKYWARD_STRIKES,
         KEYBIND_ABILITY, NIGHTS_EDGE, CHAOS_STORM, VEIL_OF_FIRE, BLIGHT, FAST_PULL, THIRD_SHOT, SLOW_PULL, MOONLIGHT_ARROW,
-        ARROW_STORM, TRANSPARENT, CHUNGUS_INFUSED
+        ARROW_STORM, TRANSPARENT, CHUNGUS_INFUSED, FROST_MOON
     }
 }

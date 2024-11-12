@@ -73,6 +73,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean disable_recipe_translucent_glaive = false;
     @Entry public static boolean disable_recipe_translucent_double_edged_greatsword = false;
     @Entry public static boolean disable_recipe_chungus_staff = true;
+    @Entry public static boolean disable_recipe_dark_moon_greatsword = false;
 
     @Entry public static boolean disable_recipe_arkenplate = false;
     @Entry public static boolean disable_recipe_chaos_helmet = false;
@@ -146,6 +147,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean disable_use_chaos_orb = false;
     @Entry public static boolean disable_use_translucent_weapons = false;
     @Entry public static boolean disable_use_chungus_staff = false;
+    @Entry public static boolean disable_use_dark_moon_greatsword = false;
 
     @Entry public static boolean disable_use_arkenplate = false;
     @Entry public static boolean disable_use_chaos_crown = false;
@@ -202,6 +204,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean is_fireproof_darkmoon_longbow = true;
     @Entry public static boolean is_fireproof_translucent_weapons = false;
     @Entry public static boolean is_fireproof_chungus_staff = false;
+    @Entry public static boolean is_fireproof_dark_moon_greatsword = true;
 
     @Entry public static boolean is_fireproof_blunderbuss = false;
     @Entry public static boolean is_fireproof_gatling_gun = false;
@@ -343,6 +346,19 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static int darkmoon_longbow_ability_min_cooldown_ticks = 60;
     @Entry public static boolean darkmoon_longbow_enchant_reduces_cooldown = true;
     @Entry public static String darkmoon_longbow_enchant_reduces_cooldown_id = "unbreaking";
+    @Entry public static int dark_moon_greatsword_damage = 10;
+    @Entry public static float dark_moon_greatsword_attack_speed = 1.2f;
+    @Entry public static int dark_moon_greatsword_post_hit_permafrost_base_amplifier = 0;
+    @Entry public static int dark_moon_greatsword_post_hit_permafrost_base_duration = 80;
+    @Entry public static int dark_moon_greatsword_frost_moon_base_duration = 400;
+    @Entry public static int dark_moon_greatsword_frost_moon_base_amplifier = 0;
+    @Entry public static int dark_moon_greatsword_frost_moon_cooldown = 700;
+    @Entry public static int dark_moon_greatsword_frost_moon_min_cooldown = 300;
+    @Entry public static float dark_moon_greatsword_projectile_damage = 8f;
+    @Entry public static int dark_moon_greatsword_projectile_permafrost_base_amplifier = 0;
+    @Entry public static int dark_moon_greatsword_projectile_permafrost_base_duration = 200;
+    @Entry public static boolean dark_moon_greatsword_enchant_reduces_cooldown = true;
+    @Entry public static String dark_moon_greatsword_enchant_reduces_cooldown_id = "damage";
     @Entry public static int dawnbreaker_damage = 8;
     @Entry public static float dawnbreaker_attack_speed = 1.6f;
     @Entry public static float dawnbreaker_ability_damage = 10.0f;

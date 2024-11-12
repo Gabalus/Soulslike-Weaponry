@@ -146,6 +146,7 @@
     "item.soulsweapons.kraken_slayer_crossbow": "크라켄 슬레이어의 석궁",
     "item.soulsweapons.darkmoon_longbow": "다크문 장궁",
     "item.soulsweapons.chungus_staff": "Chungus Staff",
+    "item.soulsweapons.dark_moon_greatsword": "Dark Moon Greatsword",
 
     "item.soulsweapons.big_chungus_spawn_egg": "중간 크기의 청거스 생성 알",
     "item.soulsweapons.withered_demon_spawn_egg": "시든 악마 생성 알",
@@ -255,6 +256,7 @@
     "effect.soulsweapons.cooldown": "쿨다운",
     "effect.soulsweapons.ghostly": "유령의",
     "effect.soulsweapons.chungus_tonic_effect": "Chungus Tonic",
+    "effect.soulsweapons.frost_moon": "Frost Moon",
 
     "item.minecraft.potion.effect.warding": "마법 방어의 물약",
     "item.minecraft.splash_potion.effect.warding": "투척용 마법 방어의 물약",
@@ -739,6 +741,12 @@
     "tooltip.soulsweapons.chungus_infused.5": "- Use on a §fModerately Sized Chungus§r to tame it, making",
     "tooltip.soulsweapons.chungus_infused.6": "it fight for you and your life",
     "tooltip.soulsweapons.chungus_infused.7": "Acquired through chungus bartering",
+
+    "tooltip.soulsweapons.frost_moon": "Frost Moon",
+    "tooltip.soulsweapons.frost_moon.1": "- Use ability keybind to give yourself §3Frost Moon§r effect,",
+    "tooltip.soulsweapons.frost_moon.2": "making you immune to freezing and powdered snow",
+    "tooltip.soulsweapons.frost_moon.3": "- While having §3Frost Moon§r effect, use the greatsword",
+    "tooltip.soulsweapons.frost_moon.4": "to shoot out §3Moonlight Beams§r that apply §bPermafrost§r",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "희귀한 형태의 영혼으로, 멸종된 것으로 여겨집니다.",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "어두우면서도 균형 잡힌 색조는",

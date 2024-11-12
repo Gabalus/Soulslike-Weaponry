@@ -146,6 +146,7 @@
     "item.soulsweapons.kraken_slayer_crossbow": "Арбалет Убийцы Кракена",
     "item.soulsweapons.darkmoon_longbow": "Длинный Лук Темной Луны",
     "item.soulsweapons.chungus_staff": "Chungus Staff",
+    "item.soulsweapons.dark_moon_greatsword": "Dark Moon Greatsword",
 
     "item.soulsweapons.big_chungus_spawn_egg": "Яйцо призыва Чунгуса Среднего Размера",
     "item.soulsweapons.withered_demon_spawn_egg": "Яйцо призыва Иссохшего Демона",
@@ -257,6 +258,7 @@
     "effect.soulsweapons.shadow_step": "Шаг Тени",
     "effect.soulsweapons.cooldown": "Перезарядка",
     "effect.soulsweapons.ghostly": "Призрачный",
+    "effect.soulsweapons.frost_moon": "Frost Moon",
 
     "item.minecraft.potion.effect.warding": "Зелье Магической Защиты",
     "item.minecraft.splash_potion.effect.warding": "Взрывное Зелье Магической Защиты",
@@ -654,6 +656,11 @@
     "tooltip.soulsweapons.chungus_infused.5": "- Use on a §fModerately Sized Chungus§r to tame it, making",
     "tooltip.soulsweapons.chungus_infused.6": "it fight for you and your life",
     "tooltip.soulsweapons.chungus_infused.7": "Acquired through chungus bartering",
+    "tooltip.soulsweapons.frost_moon": "Frost Moon",
+    "tooltip.soulsweapons.frost_moon.1": "- Use ability keybind to give yourself §3Frost Moon§r effect,",
+    "tooltip.soulsweapons.frost_moon.2": "making you immune to freezing and powdered snow",
+    "tooltip.soulsweapons.frost_moon.3": "- While having §3Frost Moon§r effect, use the greatsword",
+    "tooltip.soulsweapons.frost_moon.4": "to shoot out §3Moonlight Beams§r that apply §bPermafrost§r",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "Редкая форма душ, считавшаяся вымершей.",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "Её тёмный, но сбалансированный цвет указывает,",

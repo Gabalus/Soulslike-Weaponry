@@ -147,6 +147,7 @@
     "item.soulsweapons.kraken_slayer_crossbow": "クラーケンスレイヤークロスボウ",
     "item.soulsweapons.darkmoon_longbow": "ダークムーンロングボウ",
     "item.soulsweapons.chungus_staff": "Chungus Staff",
+    "item.soulsweapons.dark_moon_greatsword": "Dark Moon Greatsword",
 
     "item.soulsweapons.big_chungus_spawn_egg": "チャンガスのスポーンエッグ",
     "item.soulsweapons.withered_demon_spawn_egg": "枯れたデーモンのスポーンエッグ",
@@ -256,6 +257,7 @@
     "effect.soulsweapons.cooldown": "クールダウン",
     "effect.soulsweapons.ghostly": "Ghostly",
     "effect.soulsweapons.chungus_tonic_effect": "Chungus Tonic",
+    "effect.soulsweapons.frost_moon": "Frost Moon",
 
     "item.minecraft.potion.effect.warding": "魔法防御のポーション",
     "item.minecraft.splash_potion.effect.warding": "魔法防御のスプラッシュポーション",
@@ -653,6 +655,11 @@
     "tooltip.soulsweapons.chungus_infused.5": "- Use on a §fModerately Sized Chungus§r to tame it, making",
     "tooltip.soulsweapons.chungus_infused.6": "it fight for you and your life",
     "tooltip.soulsweapons.chungus_infused.7": "Acquired through chungus bartering",
+    "tooltip.soulsweapons.frost_moon": "Frost Moon",
+    "tooltip.soulsweapons.frost_moon.1": "- Use ability keybind to give yourself §3Frost Moon§r effect,",
+    "tooltip.soulsweapons.frost_moon.2": "making you immune to freezing and powdered snow",
+    "tooltip.soulsweapons.frost_moon.3": "- While having §3Frost Moon§r effect, use the greatsword",
+    "tooltip.soulsweapons.frost_moon.4": "to shoot out §3Moonlight Beams§r that apply §bPermafrost§r",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "絶滅したと考えられている珍しい形の魂。",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "暗く、しかしバランスの取れた色は、",

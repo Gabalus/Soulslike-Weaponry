@@ -1,4 +1,4 @@
-// 1.20.1	2024-11-07T19:45:42.3937356	Marium's Soulslike Weaponry/Recipes
+// 1.20.1	2024-11-13T00:25:51.0696435	Marium's Soulslike Weaponry/Recipes
 6ac617da1c0aca4adcdebe9d40978c99d55b236d data\soulsweapons\recipes\holy_greatsword.json
 77e2400341d4a08730ea5fd56df357ee5ee94537 data\soulsweapons\advancements\recipes\combat\draugr.json
 58d40c755e5fc68eb99e6f272a31fdc9b5779338 data\soulsweapons\recipes\oleander_dye.json
@@ -26,6 +26,7 @@ fba9c92d13a869ee4f4aec32061940ab07e21674 data\soulsweapons\advancements\recipes\
 43f32778da2aacd3fd5d5409150ac29ce31a3956 data\soulsweapons\advancements\recipes\combat\dragonslayer_swordspear.json
 3941e40635dc76bd95e789cc2e9d3ec5ea5cef46 data\soulsweapons\advancements\recipes\combat\forlorn_scythe.json
 dda672c98d55199a426aa07d2e4241ca0f4bccc4 data\soulsweapons\advancements\recipes\combat\moonlight_greatsword.json
+87e5e217fd5fdcbdb1bad778d85b958e3bb0d4bc data\soulsweapons\recipes\dark_moon_greatsword.json
 6d8dcf87a5d86d9655dc0254bbf6cf1cbfb97ad4 data\soulsweapons\recipes\moonlight_shortsword.json
 fbb241bd210f9b18279dbfebe6208174128f0fbc data\soulsweapons\recipes\hunter_pistol.json
 090409fec79ac4e77789185acf32e6ac26d27298 data\soulsweapons\advancements\recipes\combat\moonlight_shortsword.json
@@ -77,6 +78,7 @@ d10c17c707e44059bb5f5d9a79dc687bb39e22bf data\soulsweapons\advancements\recipes\
 7a7e6d913ebcb69dcb8dbd15ee5bb5f18051cd66 data\soulsweapons\recipes\nightfall.json
 33f7dc9a7a5d9d9581689e7f9457caf0e449dd81 data\soulsweapons\advancements\recipes\combat\moonstone_ring_left.json
 921fd76e682caacdddef89548a9e62a6fe1884bc data\soulsweapons\recipes\forlorn_scythe.json
+8b3f5f96eac88a9969029b9fd3707279ef46b21c data\soulsweapons\advancements\recipes\combat\dark_moon_greatsword.json
 b96770e60f9229e5b24ea25006b69898800b0116 data\soulsweapons\recipes\infused_blackstone.json
 456857e3822326fd5f42cd86d9573f6df0744ab3 data\soulsweapons\recipes\moonstone_ring_left.json
 c8582121d88e2728150a07b901d2a5e00e268ab9 data\soulsweapons\recipes\crucible_sword.json

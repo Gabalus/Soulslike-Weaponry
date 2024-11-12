@@ -61,6 +61,7 @@ public class WeaponRegistry {
     public static CrossbowItem KRAKEN_SLAYER_CROSSBOW = new KrakenSlayerCrossbow(new FabricItemSettings().maxDamage(1258).rarity(Rarity.EPIC), () -> Ingredient.ofItems(Items.GOLD_INGOT));
     public static BowItem DARKMOON_LONGBOW = new DarkmoonLongbow(new FabricItemSettings().maxDamage(1400).rarity(Rarity.EPIC), () -> Ingredient.ofItems(Items.GOLD_INGOT));
     public static ToolItem CHUNGUS_STAFF = new ChungusStaff(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().maxDamage(1258).rarity(Rarity.EPIC));
+    public static ToolItem DARK_MOON_GREATSWORD = new DarkMoonGreatsword(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().rarity(Rarity.EPIC));
 
     public static void init() {
         ItemRegistry.registerWeaponItem(BLUEMOON_SHORTSWORD, "bluemoon_shortsword", ConfigConstructor.disable_recipe_bluemoon_shortsword);
@@ -111,5 +112,6 @@ public class WeaponRegistry {
         ItemRegistry.registerWeaponItem(KRAKEN_SLAYER_CROSSBOW, "kraken_slayer_crossbow", ConfigConstructor.disable_recipe_kraken_slayer_crossbow);
         ItemRegistry.registerWeaponItem(DARKMOON_LONGBOW, "darkmoon_longbow", ConfigConstructor.disable_recipe_darkmoon_longbow);
         ItemRegistry.registerWeaponItem(CHUNGUS_STAFF, "chungus_staff", ConfigConstructor.disable_recipe_chungus_staff);
+        ItemRegistry.registerWeaponItem(DARK_MOON_GREATSWORD, "dark_moon_greatsword", ConfigConstructor.disable_recipe_dark_moon_greatsword);
     }
 }
