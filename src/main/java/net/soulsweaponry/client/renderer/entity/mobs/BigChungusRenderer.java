@@ -24,7 +24,8 @@ public class BigChungusRenderer extends MobEntityRenderer<BigChungus, BigChungus
 
     @Override
     public Identifier getTexture(BigChungus entity) {
-        return new Identifier(SoulsWeaponry.ModId, "textures/entity/chungus/" + (entity.isBosnian() ? "bosnian_big_chungus.png" : "big_chungus.png"));
+        String id = entity.getState().equals(BigChungus.ChungusStates.NORMAL) ? "" : String.valueOf(entity.getState()).toLowerCase() + "_";
+        return new Identifier(SoulsWeaponry.ModId, "textures/entity/chungus/" + id + "big_chungus.png");
     }
 
     @Environment(EnvType.CLIENT)

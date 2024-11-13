@@ -20,6 +20,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootTable;
@@ -50,7 +51,7 @@ import java.util.List;
 
 public class BigChungus extends TameableEntity implements InventoryOwner {
 
-    private static final TrackedData<Boolean> IS_BOSNIAN = DataTracker.registerData(BigChungus.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Integer> STATE = DataTracker.registerData(BigChungus.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Boolean> AGGRESSIVE = DataTracker.registerData(BigChungus.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> TRADE_TICKS = DataTracker.registerData(BigChungus.class, TrackedDataHandlerRegistry.INTEGER);
     private boolean healthUpdated = false;
@@ -144,9 +145,13 @@ public class BigChungus extends TameableEntity implements InventoryOwner {
         super.mobTick();
         if (!this.healthUpdated) {
             int rand = this.getRandom().nextInt(100);
-            this.setBosnian(rand == 1);
-            if (this.isBosnian()) {
-                this.updateStats();
+            switch (rand) {
+                case 1 -> {
+                    this.setState(ChungusStates.BOSNIAN);
+                    this.updateStats(50f, 200);
+                }
+                case 2,3,4,5 -> this.setState(ChungusStates.DREAM);
+                default -> this.setState(ChungusStates.NORMAL);
             }
             this.healthUpdated = true;
         }
@@ -156,28 +161,38 @@ public class BigChungus extends TameableEntity implements InventoryOwner {
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 30, 250, true, false));
             if (this.getTradeTicks() >= 60 && !this.getWorld().isClient) {
                 this.inventory.clearToList();
-                if (!this.isBosnian()) {
-                    ItemEntity entity = new ItemEntity(this.getWorld(), this.getX(), this.getY(), this.getZ(), this.getBarterItem());
-                    entity.setVelocity(0, 0.5f, 0);
-                    this.getWorld().spawnEntity(entity);
-                    this.maxTradeCount = Math.max(this.maxTradeCount - 1, 1);
-                    this.turnChance = 1f / this.maxTradeCount;
-                    if (this.getRandom().nextFloat() < this.turnChance) {
-                        this.setBosnian(true);
-                        this.updateStats();
+                switch (this.getState()) {
+                    case BOSNIAN -> ParticleHandler.particleSphereList(this.getWorld(), 10, this.getX(), this.getY(), this.getZ(), ParticleEvents.DARK_EXPLOSION_LIST, 0.2f);
+                    case DREAM -> {
+                        Item item = this.getRandom().nextBoolean() ? Items.ENDER_PEARL : Items.BLAZE_ROD;
+                        for (int i = 0; i < this.getRandom().nextBetween(1, 9); i++) {
+                            this.trade(item.getDefaultStack());
+                        }
                     }
-                } else {
-                    ParticleHandler.particleSphereList(this.getWorld(), 10, this.getX(), this.getY(), this.getZ(), ParticleEvents.DARK_EXPLOSION_LIST, 0.2f);
+                    default -> this.trade(this.getBarterItem());
                 }
                 this.setTradeTicks(0);
             }
         }
     }
 
-    private void updateStats() {
-        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(50D);
-        this.setHealth(50f);
-        this.experiencePoints = 200;
+    private void trade(ItemStack stack) {
+        ItemEntity entity = new ItemEntity(this.getWorld(), this.getX(), this.getY(), this.getZ(), stack);
+        entity.setVelocity(0, 0.5f, 0);
+        this.getWorld().spawnEntity(entity);
+        this.maxTradeCount = Math.max(this.maxTradeCount - 1, 1);
+        this.turnChance = 1f / this.maxTradeCount;
+        if (this.getRandom().nextFloat() < this.turnChance) {
+            this.setState(ChungusStates.BOSNIAN);
+            this.updateStats(50f, 200);
+            ParticleHandler.particleSphereList(this.getWorld(), 10, this.getX(), this.getY(), this.getZ(), ParticleEvents.DARK_EXPLOSION_LIST, 0.2f);
+        }
+    }
+
+    private void updateStats(float health, int exp) {
+        this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(health);
+        this.setHealth(health);
+        this.experiencePoints = exp;
     }
 
     @Override
@@ -204,12 +219,24 @@ public class BigChungus extends TameableEntity implements InventoryOwner {
         this.dataTracker.set(TRADE_TICKS, i);
     }
 
-    public boolean isBosnian() {
-        return this.dataTracker.get(IS_BOSNIAN);
+    public ChungusStates getState() {
+        return ChungusStates.values()[this.dataTracker.get(STATE)];
     }
 
-    public void setBosnian(boolean bl) {
-        this.dataTracker.set(IS_BOSNIAN, bl);
+    public void setState(ChungusStates state) {
+        for (int i = 0; i < ChungusStates.values().length; i++) {
+            if (ChungusStates.values()[i].equals(state)) {
+                this.dataTracker.set(STATE, i);
+            }
+        }
+    }
+
+    public void setStateId(int state) {
+        this.dataTracker.set(STATE, state);
+    }
+
+    public int getStateId() {
+        return this.dataTracker.get(STATE);
     }
 
     public boolean isAggressive() {
@@ -228,7 +255,7 @@ public class BigChungus extends TameableEntity implements InventoryOwner {
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        this.dataTracker.startTracking(IS_BOSNIAN, false);
+        this.dataTracker.startTracking(STATE, 0);
         this.dataTracker.startTracking(TRADE_TICKS, 0);
         this.dataTracker.startTracking(AGGRESSIVE, false);
     }
@@ -239,8 +266,8 @@ public class BigChungus extends TameableEntity implements InventoryOwner {
         if (nbt.contains("healthUpdated")) {
             this.healthUpdated = nbt.getBoolean("healthUpdated");
         }
-        if (nbt.contains("bosnian")) {
-            this.setBosnian(nbt.getBoolean("bosnian"));
+        if (nbt.contains("state")) {
+            this.setStateId(nbt.getInt("state"));
         }
         if (nbt.contains("tradeCounter")) {
             this.maxTradeCount = nbt.getInt("tradeCounter");
@@ -258,7 +285,7 @@ public class BigChungus extends TameableEntity implements InventoryOwner {
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("healthUpdated", this.healthUpdated);
-        nbt.putBoolean("bosnian", this.isBosnian());
+        nbt.putInt("state", this.getStateId());
         nbt.putInt("tradeCounter", this.maxTradeCount);
         nbt.putFloat("turnChance", this.turnChance);
         nbt.putBoolean("aggressive", this.isAggressive());
@@ -366,5 +393,9 @@ public class BigChungus extends TameableEntity implements InventoryOwner {
                 return j <= dimensionType.monsterSpawnLightTest().get(random);
             }
         }
+    }
+
+    public enum ChungusStates {
+        NORMAL, BOSNIAN, DREAM
     }
 }
