@@ -7,7 +7,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.soulsweaponry.items.MoonlightShortsword;
+import net.soulsweaponry.items.sword.MoonlightShortsword;
 
 public class MoonlightC2S {
 

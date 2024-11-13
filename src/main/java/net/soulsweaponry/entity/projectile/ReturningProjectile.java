@@ -17,7 +17,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.soulsweaponry.entitydata.ReturningProjectileData;
-import net.soulsweaponry.items.Mjolnir;
+import net.soulsweaponry.items.hammer.Mjolnir;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;

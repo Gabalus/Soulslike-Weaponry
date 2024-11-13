@@ -10,6 +10,10 @@ import net.minecraft.util.math.MathHelper;
 import net.soulsweaponry.client.registry.KeyBindRegistry;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.items.*;
+import net.soulsweaponry.items.scythe.DarkinScythePre;
+import net.soulsweaponry.items.scythe.ShadowAssassinScythe;
+import net.soulsweaponry.items.sword.BluemoonGreatsword;
+import net.soulsweaponry.items.sword.Skofnung;
 import net.soulsweaponry.registry.WeaponRegistry;
 
 import java.util.ArrayList;

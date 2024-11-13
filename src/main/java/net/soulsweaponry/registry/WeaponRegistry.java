@@ -6,10 +6,22 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Rarity;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.items.*;
+import net.soulsweaponry.items.axe.LeviathanAxe;
+import net.soulsweaponry.items.bow.DarkmoonLongbow;
+import net.soulsweaponry.items.bow.Galeforce;
+import net.soulsweaponry.items.bow.KrakenSlayer;
+import net.soulsweaponry.items.crossbow.KrakenSlayerCrossbow;
+import net.soulsweaponry.items.hammer.Mjolnir;
+import net.soulsweaponry.items.hammer.Nightfall;
 import net.soulsweaponry.items.material.ModToolMaterials;
+import net.soulsweaponry.items.scythe.*;
+import net.soulsweaponry.items.spear.CometSpear;
+import net.soulsweaponry.items.spear.DragonslayerSwordspear;
+import net.soulsweaponry.items.spear.DraupnirSpear;
 import net.soulsweaponry.items.staff.ChungusStaff;
 import net.soulsweaponry.items.staff.DragonStaff;
 import net.soulsweaponry.items.staff.WitheredWabbajack;
+import net.soulsweaponry.items.sword.*;
 
 public class WeaponRegistry {
 
