@@ -74,6 +74,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean disable_recipe_translucent_double_edged_greatsword = false;
     @Entry public static boolean disable_recipe_chungus_staff = true;
     @Entry public static boolean disable_recipe_dark_moon_greatsword = false;
+    @Entry public static boolean disable_recipe_glaive_of_hodir = false;
 
     @Entry public static boolean disable_recipe_arkenplate = false;
     @Entry public static boolean disable_recipe_chaos_helmet = false;
@@ -148,6 +149,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean disable_use_translucent_weapons = false;
     @Entry public static boolean disable_use_chungus_staff = false;
     @Entry public static boolean disable_use_dark_moon_greatsword = false;
+    @Entry public static boolean disable_use_glaive_of_hodir = false;
 
     @Entry public static boolean disable_use_arkenplate = false;
     @Entry public static boolean disable_use_chaos_crown = false;
@@ -205,6 +207,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean is_fireproof_translucent_weapons = false;
     @Entry public static boolean is_fireproof_chungus_staff = false;
     @Entry public static boolean is_fireproof_dark_moon_greatsword = true;
+    @Entry public static boolean is_fireproof_glaive_of_hodir = true;
 
     @Entry public static boolean is_fireproof_blunderbuss = false;
     @Entry public static boolean is_fireproof_gatling_gun = false;
@@ -449,6 +452,17 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static int galeforce_dash_min_cooldown = 20;
     @Entry public static boolean galeforce_dash_enchant_reduces_cooldown = false;
     @Entry public static String galeforce_dash_enchant_reduces_cooldown_id = "unbreaking";
+    @Entry public static int glaive_of_hodir_damage = 8;
+    @Entry public static float glaive_of_hodir_attack_speed = 1.3f;
+    @Entry public static float glaive_of_hodir_bonus_damage_per_stack = 0.8f;
+    @Entry public static float glaive_of_hodir_bonus_attack_speed_per_stack = 0.1f;
+    @Entry public static int glaive_of_hodir_max_stacks = 5;
+    @Entry public static int glaive_of_hodir_add_effects_cooldown = 200;
+    @Entry public static int glaive_of_hodir_effects_duration = 220;
+    @Entry public static int glaive_of_hodir_resistance_amplifier = 2;
+    @Entry public static int glaive_of_hodir_absorption_amplifier = 3;
+    @Entry public static boolean glaive_of_hodir_enchant_reduces_cooldown = true;
+    @Entry public static String glaive_of_hodir_enchant_reduces_cooldown_id = "damage";
     @Entry public static int rageblade_damage = 7;
     @Entry public static float rageblade_attack_speed = 1.6f;
     @Entry public static boolean rageblade_haste_cap = true;

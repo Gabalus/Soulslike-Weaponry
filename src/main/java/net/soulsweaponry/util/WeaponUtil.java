@@ -1,5 +1,6 @@
 package net.soulsweaponry.util;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -12,6 +13,7 @@ import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.items.*;
 import net.soulsweaponry.items.scythe.DarkinScythePre;
 import net.soulsweaponry.items.scythe.ShadowAssassinScythe;
+import net.soulsweaponry.items.spear.GlaiveOfHodir;
 import net.soulsweaponry.items.sword.BluemoonGreatsword;
 import net.soulsweaponry.items.sword.Skofnung;
 import net.soulsweaponry.registry.WeaponRegistry;
@@ -524,6 +526,19 @@ public class WeaponUtil {
                 tooltip.add(Text.translatable("tooltip.soulsweapons.frost_moon.4").formatted(Formatting.GRAY));
                 WeaponUtil.addAbilityTooltip(TooltipAbilities.KEYBIND_ABILITY, stack, tooltip);
             }
+            case GLAIVE_DANCE -> {
+                int maxStacks = stack.getItem() instanceof GlaiveOfHodir item ? item.getMaxStacks() : 5;
+                int cooldown = stack.getItem() instanceof GlaiveOfHodir item ? item.getMaxStacksCooldown() : 200;
+                tooltip.add(Text.translatable("tooltip.soulsweapons.glaive_dance").formatted(Formatting.GOLD));
+                for (int i = 1; i <= 4; i++) {
+                    tooltip.add(Text.translatable("tooltip.soulsweapons.glaive_dance." + i).formatted(Formatting.GRAY));
+                }
+                tooltip.add(Text.translatable("tooltip.soulsweapons.glaive_dance.5", maxStacks).formatted(Formatting.GRAY));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.glaive_dance.6", MathHelper.floor(cooldown / 20f)).formatted(Formatting.GRAY));
+                if (!FabricLoader.getInstance().isModLoaded("bettercombat")) {
+                    tooltip.add(Text.translatable("tooltip.soulsweapons.glaive_dance.7").formatted(Formatting.GRAY));
+                }
+            }
         }
     }
 
@@ -536,6 +551,6 @@ public class WeaponUtil {
         MOONLIGHT_ATTACK, LUNAR_HERALD, SUMMON_GHOST, SHIELD, OBLITERATE, TRIPLE_MOONLIGHT, SHADOW_STEP, DISABLE_HEAL,
         SHARPEN, IS_SHARPENED, DISABLE_DEBUFS, LUMINATE, SPIDERS_BANE, SAWBLADE, WABBAJACK, LUCK_BASED, PARRY, SKYWARD_STRIKES,
         KEYBIND_ABILITY, NIGHTS_EDGE, CHAOS_STORM, VEIL_OF_FIRE, BLIGHT, FAST_PULL, THIRD_SHOT, SLOW_PULL, MOONLIGHT_ARROW,
-        ARROW_STORM, TRANSPARENT, CHUNGUS_INFUSED, FROST_MOON
+        ARROW_STORM, TRANSPARENT, CHUNGUS_INFUSED, FROST_MOON, GLAIVE_DANCE
     }
 }

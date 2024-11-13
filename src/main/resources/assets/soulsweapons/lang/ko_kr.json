@@ -147,6 +147,7 @@
     "item.soulsweapons.darkmoon_longbow": "다크문 장궁",
     "item.soulsweapons.chungus_staff": "Chungus Staff",
     "item.soulsweapons.dark_moon_greatsword": "Dark Moon Greatsword",
+    "item.soulsweapons.glaive_of_hodir": "Glaive of Hodir",
 
     "item.soulsweapons.big_chungus_spawn_egg": "중간 크기의 청거스 생성 알",
     "item.soulsweapons.withered_demon_spawn_egg": "시든 악마 생성 알",
@@ -257,6 +258,7 @@
     "effect.soulsweapons.ghostly": "유령의",
     "effect.soulsweapons.chungus_tonic_effect": "Chungus Tonic",
     "effect.soulsweapons.frost_moon": "Frost Moon",
+    "effect.soulsweapons.blade_dance": "Blade Dance",
 
     "item.minecraft.potion.effect.warding": "마법 방어의 물약",
     "item.minecraft.splash_potion.effect.warding": "투척용 마법 방어의 물약",
@@ -747,6 +749,15 @@
     "tooltip.soulsweapons.frost_moon.2": "making you immune to freezing and powdered snow",
     "tooltip.soulsweapons.frost_moon.3": "- While having §3Frost Moon§r effect, use the greatsword",
     "tooltip.soulsweapons.frost_moon.4": "to shoot out §3Moonlight Beams§r that apply §bPermafrost§r",
+
+    "tooltip.soulsweapons.glaive_dance": "Glaive Dance",
+    "tooltip.soulsweapons.glaive_dance.1": "- Attacking entities grants stacks of §fBlade Dance§r",
+    "tooltip.soulsweapons.glaive_dance.2": "- Getting hit §creduces§r stacks of §fBlade Dance§r by 1",
+    "tooltip.soulsweapons.glaive_dance.3": "- Stacks of §fBlade Dance§r increase attack speed and",
+    "tooltip.soulsweapons.glaive_dance.4": "damage for this weapon",
+    "tooltip.soulsweapons.glaive_dance.5": "- At %s stacks, gain §fResistance§r and §eAbsorption§r",
+    "tooltip.soulsweapons.glaive_dance.6": "every %s seconds when not having §fCooldown§r effect.",
+    "tooltip.soulsweapons.glaive_dance.7": "Every 3rd attack also causes an AOE sweep around you",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "희귀한 형태의 영혼으로, 멸종된 것으로 여겨집니다.",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "어두우면서도 균형 잡힌 색조는",
