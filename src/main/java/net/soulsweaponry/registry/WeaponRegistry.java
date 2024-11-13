@@ -7,9 +7,9 @@ import net.minecraft.util.Rarity;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.items.*;
 import net.soulsweaponry.items.material.ModToolMaterials;
-import net.soulsweaponry.items.wand.ChungusStaff;
-import net.soulsweaponry.items.wand.DragonStaff;
-import net.soulsweaponry.items.wand.WitheredWabbajack;
+import net.soulsweaponry.items.staff.ChungusStaff;
+import net.soulsweaponry.items.staff.DragonStaff;
+import net.soulsweaponry.items.staff.WitheredWabbajack;
 
 public class WeaponRegistry {
 

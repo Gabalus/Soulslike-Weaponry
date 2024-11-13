@@ -1,4 +1,4 @@
-package net.soulsweaponry.items.wand;
+package net.soulsweaponry.items.staff;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffects;
