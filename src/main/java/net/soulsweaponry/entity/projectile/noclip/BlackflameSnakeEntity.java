@@ -1,4 +1,4 @@
-package net.soulsweaponry.entity.projectile.invisible;
+package net.soulsweaponry.entity.projectile.noclip;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.UUID;
 
-public class BlackflameSnakeEntity extends InvisibleEntity {
+public class BlackflameSnakeEntity extends NoClipEntity {
     private boolean hasHitPlayer;
     private static final TrackedData<Optional<UUID>> TARGET_UUID = DataTracker.registerData(BlackflameSnakeEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
 

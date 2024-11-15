@@ -16,7 +16,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.projectile.MoonlightArrow;
-import net.soulsweaponry.entity.projectile.invisible.ArrowStormEntity;
+import net.soulsweaponry.entity.projectile.noclip.ArrowStormEntity;
 import net.soulsweaponry.items.ModdedBow;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.util.IKeybindAbility;

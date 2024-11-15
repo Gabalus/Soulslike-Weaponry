@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 import net.soulsweaponry.client.renderer.item.MjolnirItemRenderer;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.projectile.MjolnirProjectile;
-import net.soulsweaponry.entity.projectile.invisible.WarmupLightningEntity;
+import net.soulsweaponry.entity.projectile.noclip.WarmupLightningEntity;
 import net.soulsweaponry.items.ChargeToUseItem;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.util.WeaponUtil;

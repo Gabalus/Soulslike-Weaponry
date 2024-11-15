@@ -1,17 +1,16 @@
-package net.soulsweaponry.entity.projectile.invisible;
+package net.soulsweaponry.entity.projectile.noclip;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.world.World;
 import net.soulsweaponry.config.ConfigConstructor;
-import net.soulsweaponry.entity.projectile.invisible.InvisibleEntity;
 import net.soulsweaponry.registry.ParticleRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 
 import java.util.List;
 
-public class NightWaveEntity extends InvisibleEntity {
+public class NightWaveEntity extends NoClipEntity {
 
     public NightWaveEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);

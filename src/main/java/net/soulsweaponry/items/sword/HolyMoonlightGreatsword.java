@@ -15,7 +15,7 @@ import net.minecraft.util.math.*;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 import net.soulsweaponry.config.ConfigConstructor;
-import net.soulsweaponry.entity.projectile.invisible.HolyMoonlightPillar;
+import net.soulsweaponry.entity.projectile.noclip.HolyMoonlightPillar;
 import net.soulsweaponry.items.IChargeNeeded;
 import net.soulsweaponry.items.TrickWeapon;
 import net.soulsweaponry.particles.ParticleEvents;

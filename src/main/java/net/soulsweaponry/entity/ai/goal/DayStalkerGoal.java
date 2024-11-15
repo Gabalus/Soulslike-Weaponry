@@ -24,7 +24,7 @@ import net.soulsweaponry.entity.mobs.WarmthEntity;
 import net.soulsweaponry.entity.projectile.GrowingFireball;
 import net.soulsweaponry.entity.projectile.MoonlightProjectile;
 import net.soulsweaponry.entity.projectile.UntargetableFireball;
-import net.soulsweaponry.entity.projectile.invisible.FlamePillar;
+import net.soulsweaponry.entity.projectile.noclip.FlamePillar;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.CustomDeathHandler;

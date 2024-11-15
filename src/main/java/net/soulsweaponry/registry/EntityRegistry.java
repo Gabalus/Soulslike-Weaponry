@@ -21,7 +21,7 @@ import net.soulsweaponry.entity.AreaEffectSphere;
 import net.soulsweaponry.entity.ai.goal.NightProwlerGoal;
 import net.soulsweaponry.entity.mobs.*;
 import net.soulsweaponry.entity.projectile.*;
-import net.soulsweaponry.entity.projectile.invisible.*;
+import net.soulsweaponry.entity.projectile.noclip.*;
 
 public class EntityRegistry {
 

@@ -1,4 +1,4 @@
-package net.soulsweaponry.entity.projectile.invisible;
+package net.soulsweaponry.entity.projectile.noclip;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -9,7 +9,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.world.World;
 import net.soulsweaponry.registry.SoundRegistry;
 
-public class FogEntity extends InvisibleEntity {
+public class FogEntity extends NoClipEntity {
 
     public FogEntity(EntityType<? extends FogEntity> entityType, World world) {
         super(entityType, world);

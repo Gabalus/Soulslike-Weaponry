@@ -27,10 +27,10 @@ import net.soulsweaponry.entity.mobs.*;
 import net.soulsweaponry.entity.projectile.MoonlightProjectile;
 import net.soulsweaponry.entity.projectile.NightsEdge;
 import net.soulsweaponry.entity.projectile.NoDragWitherSkull;
-import net.soulsweaponry.entity.projectile.invisible.BlackflameSnakeEntity;
-import net.soulsweaponry.entity.projectile.invisible.FogEntity;
-import net.soulsweaponry.entity.projectile.invisible.InvisibleEntity;
-import net.soulsweaponry.entity.projectile.invisible.NightWaveEntity;
+import net.soulsweaponry.entity.projectile.noclip.BlackflameSnakeEntity;
+import net.soulsweaponry.entity.projectile.noclip.FogEntity;
+import net.soulsweaponry.entity.projectile.noclip.NoClipEntity;
+import net.soulsweaponry.entity.projectile.noclip.NightWaveEntity;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.particles.ParticleEvents;
@@ -920,10 +920,10 @@ public class NightProwlerGoal extends MeleeAttackGoal {
         this.checkAndReset(this.boss.isPhaseTwo() ? 1 : 10, 0);
     }
 
-    public static class DeathSpiralEntity extends InvisibleEntity {
+    public static class DeathSpiralEntity extends NoClipEntity {
         private DeathSpiralLogic logic = new DeathSpiralLogic(this.getPos(), 1f);
 
-        public DeathSpiralEntity(EntityType<? extends InvisibleEntity> entityType, World world) {
+        public DeathSpiralEntity(EntityType<? extends NoClipEntity> entityType, World world) {
             super(entityType, world);
         }
 

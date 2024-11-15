@@ -1,4 +1,4 @@
-package net.soulsweaponry.entity.projectile.invisible;
+package net.soulsweaponry.entity.projectile.noclip;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
@@ -14,11 +14,11 @@ import net.minecraft.world.World;
  * </p>
  * <p>NB! Remember to also register the invisible model in the client.</p>
  */
-public abstract class InvisibleWarmupEntity extends InvisibleEntity {
+public abstract class NoClipWarmupEntity extends NoClipEntity {
 
     private int warmup;
 
-    public InvisibleWarmupEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
+    public NoClipWarmupEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
 

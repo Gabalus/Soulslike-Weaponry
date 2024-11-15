@@ -1,11 +1,11 @@
-package net.soulsweaponry.entity.projectile.invisible;
+package net.soulsweaponry.entity.projectile.noclip;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.world.World;
 
-public class WarmupLightningEntity extends InvisibleWarmupEntity {
+public class WarmupLightningEntity extends NoClipWarmupEntity {
 
     public WarmupLightningEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);

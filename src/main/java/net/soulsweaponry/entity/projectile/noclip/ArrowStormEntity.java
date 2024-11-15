@@ -1,4 +1,4 @@
-package net.soulsweaponry.entity.projectile.invisible;
+package net.soulsweaponry.entity.projectile.noclip;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -9,7 +9,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.soulsweaponry.entity.projectile.MoonlightArrow;
 
-public class ArrowStormEntity extends InvisibleEntity {
+public class ArrowStormEntity extends NoClipEntity {
 
     private int maxArrowAge = 1000;
 

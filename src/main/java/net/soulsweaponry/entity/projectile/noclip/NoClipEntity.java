@@ -1,4 +1,4 @@
-package net.soulsweaponry.entity.projectile.invisible;
+package net.soulsweaponry.entity.projectile.noclip;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -13,11 +13,11 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 import net.soulsweaponry.registry.WeaponRegistry;
 
-public abstract class InvisibleEntity extends PersistentProjectileEntity {
+public abstract class NoClipEntity extends PersistentProjectileEntity {
 
     private ItemStack stack;
 
-    public InvisibleEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
+    public NoClipEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
         this.noClip = true;
         this.setDamage(2D);
