@@ -14,6 +14,7 @@ public class ParticleRegistry {
     public static final DefaultParticleType PURPLE_FLAME = FabricParticleTypes.simple();
     public static final DefaultParticleType DARK_STAR = FabricParticleTypes.simple();
     public static final DefaultParticleType BLACK_FLAME = FabricParticleTypes.simple();
+    public static final DefaultParticleType SUN_PARTICLE = FabricParticleTypes.simple();
 
     public static void init() {
         registerParticle(NIGHTFALL_PARTICLE, "nightfall_particle");
@@ -21,6 +22,7 @@ public class ParticleRegistry {
         registerParticle(PURPLE_FLAME, "purple_flame");
         registerParticle(DARK_STAR, "dark_star");
         registerParticle(BLACK_FLAME, "black_flame");
+        registerParticle(SUN_PARTICLE, "sun_particle");
     }
 
     public static void registerParticle(DefaultParticleType particle, String name) {

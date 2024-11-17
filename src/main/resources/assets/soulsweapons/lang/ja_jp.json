@@ -226,6 +226,7 @@
     "entity.soulsweapons.arrow_storm_entity": "アローストーム",
     "entity.soulsweapons.holy_moonlight_pillar": "聖なる月光の柱",
     "entity.soulsweapons.warmup_lightning": "ウォームアップライトニング",
+    "entity.soulsweapons.ghost_glaive": "Ghost Glaive",
 
     "death.attack.bleed": "%1$s が出血しました",
     "death.attack.bleed.player": "%1$s が出血しました",
@@ -670,6 +671,10 @@
     "tooltip.soulsweapons.glaive_dance.5": "- At %s stacks, gain §fResistance§r and §eAbsorption§r",
     "tooltip.soulsweapons.glaive_dance.6": "every %s seconds when not having §fCooldown§r effect.",
     "tooltip.soulsweapons.glaive_dance.7": "Every 3rd attack also causes an AOE sweep around you",
+    "tooltip.soulsweapons.ghost_glaive": "Spectral Glaive",
+    "tooltip.soulsweapons.ghost_glaive.1": "- Use to throw out a spectral glaive that goes",
+    "tooltip.soulsweapons.ghost_glaive.2": "through walls, damaging and applying %s",
+    "tooltip.soulsweapons.ghost_glaive.3": "posture loss to targets it flies through",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "絶滅したと考えられている珍しい形の魂。",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "暗く、しかしバランスの取れた色は、",

@@ -225,6 +225,7 @@
     "entity.soulsweapons.arrow_storm_entity": "Arrow Storm",
     "entity.soulsweapons.holy_moonlight_pillar": "Holy Moonlight Pillar",
     "entity.soulsweapons.warmup_lightning": "Warmup Lightning",
+    "entity.soulsweapons.ghost_glaive": "Ghost Glaive",
 
     "death.attack.bleed": "%1$s流血至死",
     "death.attack.bleed.player": "%1$s流血至死",
@@ -669,6 +670,10 @@
     "tooltip.soulsweapons.glaive_dance.5": "- At %s stacks, gain §fResistance§r and §eAbsorption§r",
     "tooltip.soulsweapons.glaive_dance.6": "every %s seconds when not having §fCooldown§r effect.",
     "tooltip.soulsweapons.glaive_dance.7": "Every 3rd attack also causes an AOE sweep around you",
+    "tooltip.soulsweapons.ghost_glaive": "Spectral Glaive",
+    "tooltip.soulsweapons.ghost_glaive.1": "- Use to throw out a spectral glaive that goes",
+    "tooltip.soulsweapons.ghost_glaive.2": "through walls, damaging and applying %s",
+    "tooltip.soulsweapons.ghost_glaive.3": "posture loss to targets it flies through",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "A rare form of souls, thought to be extinct.",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "It's dark, but balanced color, suggests",

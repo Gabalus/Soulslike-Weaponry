@@ -53,6 +53,11 @@ public abstract class NoClipEntity extends PersistentProjectileEntity {
     }
 
     @Override
+    public boolean isFireImmune() {
+        return true;
+    }
+
+    @Override
     protected boolean canHit(Entity entity) {
         return false;
     }

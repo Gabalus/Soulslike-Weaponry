@@ -357,7 +357,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static int dark_moon_greatsword_frost_moon_base_amplifier = 0;
     @Entry public static int dark_moon_greatsword_frost_moon_cooldown = 700;
     @Entry public static int dark_moon_greatsword_frost_moon_min_cooldown = 300;
-    @Entry public static float dark_moon_greatsword_projectile_damage = 8f;
+    @Entry public static float dark_moon_greatsword_projectile_damage = 7f;
     @Entry public static int dark_moon_greatsword_projectile_permafrost_base_amplifier = 0;
     @Entry public static int dark_moon_greatsword_projectile_permafrost_base_duration = 200;
     @Entry public static boolean dark_moon_greatsword_enchant_reduces_cooldown = true;
@@ -463,6 +463,9 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static int glaive_of_hodir_absorption_amplifier = 3;
     @Entry public static boolean glaive_of_hodir_enchant_reduces_cooldown = true;
     @Entry public static String glaive_of_hodir_enchant_reduces_cooldown_id = "damage";
+    @Entry public static float glaive_of_hodir_projectile_damage = 7f;
+    @Entry public static int glaive_of_hodir_projectile_cooldown = 160;
+    @Entry public static int glaive_of_hodir_projectile_posture_loss = 125;
     @Entry public static int rageblade_damage = 7;
     @Entry public static float rageblade_attack_speed = 1.6f;
     @Entry public static boolean rageblade_haste_cap = true;

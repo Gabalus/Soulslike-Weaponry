@@ -3,6 +3,7 @@ package net.soulsweaponry.mixin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -34,6 +35,21 @@ public class LivingEntityMixin {
         LivingEntity entity = ((LivingEntity)(Object)this);
         float newAmount = info.getReturnValue();
         info.setReturnValue(ModifyDamageUtil.modifyDamageTaken(entity, newAmount, source));
+    }
+
+    @Inject(method = "damage", at = @At("TAIL"))
+    public void interceptDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> info) {
+        LivingEntity entity = ((LivingEntity)(Object)this);
+        // Remove stacks of Blade Dance when taking damage
+        if (info.getReturnValue() && entity.hasStatusEffect(EffectRegistry.BLADE_DANCE)) {
+            int amp = entity.getStatusEffect(EffectRegistry.BLADE_DANCE).getAmplifier();
+            int duration = entity.getStatusEffect(EffectRegistry.BLADE_DANCE).getDuration();
+            entity.removeStatusEffect(EffectRegistry.BLADE_DANCE);
+            amp--;
+            if (amp >= 0) {
+                entity.addStatusEffect(new StatusEffectInstance(EffectRegistry.BLADE_DANCE, duration, amp));
+            }
+        }
     }
 
     @Inject(method = "heal", at = @At("HEAD"), cancellable = true)

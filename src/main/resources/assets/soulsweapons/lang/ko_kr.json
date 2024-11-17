@@ -225,6 +225,7 @@
     "entity.soulsweapons.arrow_storm_entity": "화살 폭풍",
     "entity.soulsweapons.holy_moonlight_pillar": "신성한 달빛 기둥",
     "entity.soulsweapons.warmup_lightning": "전조 번개",
+    "entity.soulsweapons.ghost_glaive": "Ghost Glaive",
 
     "death.attack.bleed": "%1$s가 출혈로 사망했습니다.",
     "death.attack.bleed.player": "%1$s가 출혈로 사망했습니다.",
@@ -758,6 +759,10 @@
     "tooltip.soulsweapons.glaive_dance.5": "- At %s stacks, gain §fResistance§r and §eAbsorption§r",
     "tooltip.soulsweapons.glaive_dance.6": "every %s seconds when not having §fCooldown§r effect.",
     "tooltip.soulsweapons.glaive_dance.7": "Every 3rd attack also causes an AOE sweep around you",
+    "tooltip.soulsweapons.ghost_glaive": "Spectral Glaive",
+    "tooltip.soulsweapons.ghost_glaive.1": "- Use to throw out a spectral glaive that goes",
+    "tooltip.soulsweapons.ghost_glaive.2": "through walls, damaging and applying %s",
+    "tooltip.soulsweapons.ghost_glaive.3": "posture loss to targets it flies through",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "희귀한 형태의 영혼으로, 멸종된 것으로 여겨집니다.",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "어두우면서도 균형 잡힌 색조는",

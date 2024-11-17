@@ -1,4 +1,4 @@
-// 1.20.1	2024-11-13T00:25:51.0696435	Marium's Soulslike Weaponry/Recipes
+// 1.20.1	2024-11-17T00:16:16.4269084	Marium's Soulslike Weaponry/Recipes
 6ac617da1c0aca4adcdebe9d40978c99d55b236d data\soulsweapons\recipes\holy_greatsword.json
 77e2400341d4a08730ea5fd56df357ee5ee94537 data\soulsweapons\advancements\recipes\combat\draugr.json
 58d40c755e5fc68eb99e6f272a31fdc9b5779338 data\soulsweapons\recipes\oleander_dye.json
@@ -57,8 +57,8 @@ b524fe4a2a6f23bc1728bd0403b818e84d0d4c09 data\soulsweapons\advancements\recipes\
 95b4b7e161f21e8cdde86798deecc3ebcb095acf data\soulsweapons\advancements\recipes\combat\moonstone_ring_right.json
 491bd8fcb7b4150fca253168668af956113cf7e7 data\soulsweapons\advancements\recipes\combat\gatling_gun.json
 334fc31225287eb702ab4d0d829d26bffc74253f data\soulsweapons\recipes\moonstone_hoe_left.json
-88145b8050d724633f466695a68d0fa374cbbcbc data\soulsweapons\recipes\lost_soul.json
 72b15147bdacd0ea40924a3bee06e3d53a37e427 data\soulsweapons\recipes\moonstone_shovel.json
+88145b8050d724633f466695a68d0fa374cbbcbc data\soulsweapons\recipes\lost_soul.json
 d3c628558a9b48bb8521e59e8fe3083d3578d9f2 data\soulsweapons\advancements\recipes\combat\pure_moonlight_greatsword.json
 fc3c6021ad005f58dd3da1ff379cd8209df31bac data\soulsweapons\recipes\soul_reaper.json
 5cc79c9e1c1660aabd6f056172a71788f39ca1b5 data\soulsweapons\recipes\darkmoon_longbow.json
@@ -81,6 +81,7 @@ d10c17c707e44059bb5f5d9a79dc687bb39e22bf data\soulsweapons\advancements\recipes\
 8b3f5f96eac88a9969029b9fd3707279ef46b21c data\soulsweapons\advancements\recipes\combat\dark_moon_greatsword.json
 b96770e60f9229e5b24ea25006b69898800b0116 data\soulsweapons\recipes\infused_blackstone.json
 456857e3822326fd5f42cd86d9573f6df0744ab3 data\soulsweapons\recipes\moonstone_ring_left.json
+7d2a8ad81b6330855c2729808701db850ccca877 data\soulsweapons\recipes\glaive_of_hodir.json
 c8582121d88e2728150a07b901d2a5e00e268ab9 data\soulsweapons\recipes\crucible_sword.json
 201d16d9a060d60ae00a6a07b346d8faa5f683c4 data\soulsweapons\advancements\recipes\tools\moonstone_hoe_right.json
 784c73f7160aba3809726d1ef696a301f22d71eb data\soulsweapons\recipes\moonstone_pickaxe.json
@@ -133,6 +134,7 @@ c3cd0c618563cdee96f72b46dbd703f340e58beb data\soulsweapons\recipes\lich_bane.jso
 2b178e3ef8cd0094d08a6b1b1398add3f6e03e31 data\soulsweapons\advancements\recipes\misc\molten_demon_heart.json
 f87e7db42177aacbb73fda487a3f15f9833777b6 data\soulsweapons\recipes\verglas_block.json
 552928dda96ed322ec8d16e2bf5cefea3fba9cd5 data\soulsweapons\advancements\recipes\combat\mjolnir.json
+5368b1c8436ac606fa2710bf0feefbda8cc7ea77 data\soulsweapons\advancements\recipes\combat\glaive_of_hodir.json
 716ed49085697daeb8dbbb4894fe759a79188ad9 data\soulsweapons\advancements\recipes\combat\chungus_staff.json
 d209636f275af86ae6b739dc0a2d513d88e45581 data\soulsweapons\advancements\recipes\combat\soul_ingot_leggings.json
 ce3891d4ce997d08785cbbfff0ee645602d1251e data\soulsweapons\advancements\recipes\combat\comet_spear.json
