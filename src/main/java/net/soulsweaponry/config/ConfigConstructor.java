@@ -435,6 +435,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static float excalibur_attack_speed = 1.6f;
     @Entry(min=0, max=1D) public static double excalibur_life_guard_percent = 0.3;
     @Entry public static float excalibur_sonic_boom_damage = 10f;
+    @Entry public static float excalibur_sonic_boom_knockback_power = 0.5f;
     @Entry public static int excalibur_sonic_boom_cooldown = 100;
     @Entry public static float excalibur_sonic_boom_max_range = 40f;
     @Entry public static float excalibur_sonic_boom_target_search_range = 16f;
