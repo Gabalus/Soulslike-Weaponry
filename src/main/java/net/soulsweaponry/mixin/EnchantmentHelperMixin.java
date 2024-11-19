@@ -1,5 +1,6 @@
 package net.soulsweaponry.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
@@ -46,15 +47,20 @@ public class EnchantmentHelperMixin {
         info.setReturnValue(enchantments);
     }
 
-    @Inject(method = "getAttackDamage", at = @At("TAIL"), cancellable = true)
-    private static void interceptGetDamage(ItemStack stack, EntityGroup group, CallbackInfoReturnable<Float> cir) {
+    @ModifyReturnValue(method = "getAttackDamage", at = @At("TAIL"))
+    private static float modifyAttackDamage(float originalDamage, ItemStack stack, EntityGroup group) {
+        float modifiedDamage = originalDamage;
         if (stack.isOf(WeaponRegistry.STING) && group == EntityGroup.ARTHROPOD) {
-            float value = cir.getReturnValue() + ConfigConstructor.sting_bonus_arthropod_damage;
-            cir.setReturnValue(value);
+            modifiedDamage += ConfigConstructor.sting_bonus_arthropod_damage;
         }
-        if (group == EntityGroup.UNDEAD && (stack.getItem() instanceof TrickWeapon trickWeapon && trickWeapon.hasUndeadBonus() && !trickWeapon.isDisabled(stack) || stack.isOf(WeaponRegistry.MASTER_SWORD))) {
-            float value = cir.getReturnValue() + ConfigConstructor.righteous_undead_bonus_damage + (float) EnchantmentHelper.getLevel(Enchantments.FIRE_ASPECT, stack);
-            cir.setReturnValue(value);
+        if (group == EntityGroup.UNDEAD &&
+                (stack.getItem() instanceof TrickWeapon trickWeapon &&
+                        trickWeapon.hasUndeadBonus() &&
+                        !trickWeapon.isDisabled(stack) ||
+                        stack.isOf(WeaponRegistry.MASTER_SWORD))) {
+            modifiedDamage += ConfigConstructor.righteous_undead_bonus_damage
+                    + (float) EnchantmentHelper.getLevel(Enchantments.FIRE_ASPECT, stack);
         }
+        return modifiedDamage;
     }
 }

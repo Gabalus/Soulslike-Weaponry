@@ -545,6 +545,18 @@ public class WeaponUtil {
                 tooltip.add(Text.translatable("tooltip.soulsweapons.ghost_glaive.2", ConfigConstructor.glaive_of_hodir_projectile_posture_loss).formatted(Formatting.GRAY));
                 tooltip.add(Text.translatable("tooltip.soulsweapons.ghost_glaive.3").formatted(Formatting.GRAY));
             }
+            case SONIC_BOOM -> {
+                tooltip.add(Text.translatable("tooltip.soulsweapons.sonic_boom").formatted(Formatting.AQUA));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.sonic_boom.1").formatted(Formatting.GRAY));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.sonic_boom.2", String.format("%.1f", ConfigConstructor.excalibur_sonic_boom_max_range)).formatted(Formatting.GRAY));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.sonic_boom.3", String.format("%.1f", ConfigConstructor.excalibur_sonic_boom_target_search_range)).formatted(Formatting.GRAY));
+            }
+            case LIFE_GUARD -> {
+                ILifeGuard item = (ILifeGuard) stack.getItem();
+                tooltip.add(Text.translatable("tooltip.soulsweapons.life_guard").formatted(Formatting.RED));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.life_guard.1", String.format("%.1f", item.getLifeGuardPercent(stack) * 100) + "%").formatted(Formatting.GRAY));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.life_guard.2").formatted(Formatting.GRAY));
+            }
         }
     }
 
@@ -557,6 +569,6 @@ public class WeaponUtil {
         MOONLIGHT_ATTACK, LUNAR_HERALD, SUMMON_GHOST, SHIELD, OBLITERATE, TRIPLE_MOONLIGHT, SHADOW_STEP, DISABLE_HEAL,
         SHARPEN, IS_SHARPENED, DISABLE_DEBUFS, LUMINATE, SPIDERS_BANE, SAWBLADE, WABBAJACK, LUCK_BASED, PARRY, SKYWARD_STRIKES,
         KEYBIND_ABILITY, NIGHTS_EDGE, CHAOS_STORM, VEIL_OF_FIRE, BLIGHT, FAST_PULL, THIRD_SHOT, SLOW_PULL, MOONLIGHT_ARROW,
-        ARROW_STORM, TRANSPARENT, CHUNGUS_INFUSED, FROST_MOON, GLAIVE_DANCE, GHOST_GLAIVE
+        ARROW_STORM, TRANSPARENT, CHUNGUS_INFUSED, FROST_MOON, GLAIVE_DANCE, GHOST_GLAIVE, SONIC_BOOM, LIFE_GUARD
     }
 }

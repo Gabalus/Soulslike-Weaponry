@@ -8,6 +8,7 @@
     "soulsweapons.weapon.no_freyr_sword": "У вас нет привязанного Меча Фрейра!",
     "soulsweapons.weapon.on_cooldown": "Нельзя использовать эту способность во время эффекта перезарядки!",
     "soulsweapons.weapon.no_soulbound_weapon": "У вас нет привязанного 'Привязанного душой' оружия!",
+    "soulsweapons.weapon.out_of_range": "Target is out of range!",
 
     "block.soulsweapons.moonstone_block": "Лунный Блок",
     "block.soulsweapons.moonstone_ore": "Лунная Руда",
@@ -148,6 +149,7 @@
     "item.soulsweapons.chungus_staff": "Chungus Staff",
     "item.soulsweapons.dark_moon_greatsword": "Dark Moon Greatsword",
     "item.soulsweapons.glaive_of_hodir": "Glaive of Hodir",
+    "item.soulsweapons.excalibur": "Excalibur",
 
     "item.soulsweapons.big_chungus_spawn_egg": "Яйцо призыва Чунгуса Среднего Размера",
     "item.soulsweapons.withered_demon_spawn_egg": "Яйцо призыва Иссохшего Демона",
@@ -676,6 +678,13 @@
     "tooltip.soulsweapons.ghost_glaive.1": "- Use to throw out a spectral glaive that goes",
     "tooltip.soulsweapons.ghost_glaive.2": "through walls, damaging and applying %s",
     "tooltip.soulsweapons.ghost_glaive.3": "posture loss to targets it flies through",
+    "tooltip.soulsweapons.sonic_boom": "Sonic Boom",
+    "tooltip.soulsweapons.sonic_boom.1": "- Use to shoot a §bSonic Boom§r towards your last",
+    "tooltip.soulsweapons.sonic_boom.2": "target hit if it is within %s blocks, otherwise",
+    "tooltip.soulsweapons.sonic_boom.3": "target nearest entity within %s blocks range",
+    "tooltip.soulsweapons.life_guard": "Life Guard",
+    "tooltip.soulsweapons.life_guard.1": "- %s of damage taken damages the item",
+    "tooltip.soulsweapons.life_guard.2": "instead of the user",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "Редкая форма душ, считавшаяся вымершей.",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "Её тёмный, но сбалансированный цвет указывает,",

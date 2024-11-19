@@ -8,6 +8,7 @@
     "soulsweapons.weapon.no_freyr_sword": "당신에게 귀속된 프레이르의 검이 없습니다!",
     "soulsweapons.weapon.on_cooldown": "쿨다운 효과로 인해 이 능력을 사용할 수 없습니다!",
     "soulsweapons.weapon.no_soulbound_weapon": "당신에게 귀속된 '영혼 결속' 무기가 없습니다!",
+    "soulsweapons.weapon.out_of_range": "Target is out of range!",
 
     "block.soulsweapons.moonstone_block": "월장석 블록",
     "block.soulsweapons.moonstone_ore": "월장석 광석",
@@ -148,6 +149,7 @@
     "item.soulsweapons.chungus_staff": "Chungus Staff",
     "item.soulsweapons.dark_moon_greatsword": "Dark Moon Greatsword",
     "item.soulsweapons.glaive_of_hodir": "Glaive of Hodir",
+    "item.soulsweapons.excalibur": "Excalibur",
 
     "item.soulsweapons.big_chungus_spawn_egg": "중간 크기의 청거스 생성 알",
     "item.soulsweapons.withered_demon_spawn_egg": "시든 악마 생성 알",
@@ -763,6 +765,13 @@
     "tooltip.soulsweapons.ghost_glaive.1": "- Use to throw out a spectral glaive that goes",
     "tooltip.soulsweapons.ghost_glaive.2": "through walls, damaging and applying %s",
     "tooltip.soulsweapons.ghost_glaive.3": "posture loss to targets it flies through",
+    "tooltip.soulsweapons.sonic_boom": "Sonic Boom",
+    "tooltip.soulsweapons.sonic_boom.1": "- Use to shoot a §bSonic Boom§r towards your last",
+    "tooltip.soulsweapons.sonic_boom.2": "target hit if it is within %s blocks, otherwise",
+    "tooltip.soulsweapons.sonic_boom.3": "target nearest entity within %s blocks range",
+    "tooltip.soulsweapons.life_guard": "Life Guard",
+    "tooltip.soulsweapons.life_guard.1": "- %s of damage taken damages the item",
+    "tooltip.soulsweapons.life_guard.2": "instead of the user",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "희귀한 형태의 영혼으로, 멸종된 것으로 여겨집니다.",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "어두우면서도 균형 잡힌 색조는",

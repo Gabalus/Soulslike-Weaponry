@@ -6,10 +6,16 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Hand;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.projectile.KrakenSlayerProjectile;
+import net.soulsweaponry.items.ILifeGuard;
+import net.soulsweaponry.particles.ParticleHandler;
 import net.soulsweaponry.registry.EffectRegistry;
 import net.soulsweaponry.registry.ItemRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
@@ -56,6 +62,23 @@ public class ModifyDamageUtil {
         if (source.getSource() instanceof KrakenSlayerProjectile projectile) {
             float trueDamage = projectile.getTrueDamage();
             newAmount += entity instanceof PlayerEntity ? trueDamage * ConfigConstructor.kraken_slayer_player_true_damage_taken_modifier : trueDamage;
+        }
+        // Inflict percent of damage to held ILifeGuard item instead of damage to the user (not stackable)
+        for (Hand hand : Hand.values()) {
+            ItemStack stack = entity.getStackInHand(hand);
+            if (stack.getItem() instanceof ILifeGuard guard) {
+                float damage = Math.max(0, (float) (newAmount * (1D - guard.getLifeGuardPercent(stack))));
+                int rounded = Math.round(newAmount);
+                if (rounded > 0) {
+                    stack.damage(rounded, entity, (p) -> p.sendToolBreakStatus(hand));
+                }
+                newAmount = damage;
+                for (int i = 0; i < 4; i++) {
+                    ParticleHandler.singleParticle(entity.getWorld(), ParticleTypes.SOUL, entity.getParticleX(1f), entity.getRandomBodyY(), entity.getParticleZ(1f), 0, 0, 0);
+                }
+                entity.getWorld().playSound(null, entity.getBlockPos(), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.PLAYERS, 1f, 1f);
+                break;
+            }
         }
         return newAmount;
     }

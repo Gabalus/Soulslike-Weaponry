@@ -12,7 +12,8 @@ public enum ModToolMaterials implements ToolMaterial {
     LOST_SOUL(328, 7.0f, -1.0f, MiningLevels.IRON, 20, Ingredient.ofItems(ItemRegistry.LOST_SOUL, ItemRegistry.SOUL_INGOT)),
     MOONSTONE_OR_VERGLAS(1756, 10.0f, -1.0f, MiningLevels.DIAMOND, 10, Ingredient.ofItems(ItemRegistry.MOONSTONE, ItemRegistry.VERGLAS)),
     CRIMSON_INGOT(1984, 10.0f, -1.0f, MiningLevels.DIAMOND, 8, Ingredient.ofItems(ItemRegistry.CRIMSON_INGOT)),
-    MOONSTONE_TOOL(1721, 8.5f, 3.0f, MiningLevels.NETHERITE, 12, Ingredient.ofItems(ItemRegistry.MOONSTONE, ItemRegistry.VERGLAS));
+    MOONSTONE_TOOL(1721, 8.5f, 3.0f, MiningLevels.NETHERITE, 12, Ingredient.ofItems(ItemRegistry.MOONSTONE, ItemRegistry.VERGLAS)),
+    ECHO_SHARD(2548, 10.0f, -1.0f, MiningLevels.DIAMOND, 10, Ingredient.ofItems(Items.ECHO_SHARD));
 
     private final int durability;
     private final float miningSpeedMultiplier;
@@ -21,7 +22,7 @@ public enum ModToolMaterials implements ToolMaterial {
     private final int enchantability;
     private final Ingredient repairIngredient;
 
-    private ModToolMaterials(int durability, float miningSpeedMultiplier, float attackDamage, int miningLevel, int enchantability, Ingredient repairIngredient) {
+    ModToolMaterials(int durability, float miningSpeedMultiplier, float attackDamage, int miningLevel, int enchantability, Ingredient repairIngredient) {
         this.durability = durability;
         this.miningSpeedMultiplier = miningSpeedMultiplier;
         this.attackDamage = attackDamage;

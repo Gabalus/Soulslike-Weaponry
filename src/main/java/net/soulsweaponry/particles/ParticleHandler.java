@@ -84,6 +84,9 @@ public class ParticleHandler {
         }
     }
 
+    /**
+     * Alternative: serverWorld.spawnParticles(...);
+     */
     public static void singleParticle(World world, ParticleEffect particle, double x, double y, double z, double velX, double velY, double velZ) {
         if (world.isClient) {
             world.addParticle(particle, x, y, z, velX, velY, velZ);

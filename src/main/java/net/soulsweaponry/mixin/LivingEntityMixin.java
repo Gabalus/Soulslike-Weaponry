@@ -1,5 +1,6 @@
 package net.soulsweaponry.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -19,6 +20,7 @@ import net.soulsweaponry.registry.EffectRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.ModifyDamageUtil;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -27,14 +29,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
 
+    @Unique
+    private DamageSource capturedDamageSource;
+
+    @Inject(method = "modifyAppliedDamage", at = @At("HEAD"))
+    private void captureDamageSource(DamageSource source, float amount, CallbackInfoReturnable<Float> info) {
+        this.capturedDamageSource = source;
+    }
+
     /*
      * NB! Only called if the damage is bigger than 0 (decimals count)
      */
-    @Inject(method = "modifyAppliedDamage", at = @At("TAIL"), cancellable = true)
-    protected void modifyAppliedDamage(DamageSource source, float amount, CallbackInfoReturnable<Float> info) {
-        LivingEntity entity = ((LivingEntity)(Object)this);
-        float newAmount = info.getReturnValue();
-        info.setReturnValue(ModifyDamageUtil.modifyDamageTaken(entity, newAmount, source));
+    @ModifyReturnValue(method = "modifyAppliedDamage", at = @At("TAIL"))
+    private float modifyDamageReturnValue(float originalAmount) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+        if (capturedDamageSource != null) {
+            return ModifyDamageUtil.modifyDamageTaken(entity, originalAmount, capturedDamageSource);
+        }
+        return originalAmount;
     }
 
     @Inject(method = "damage", at = @At("TAIL"))

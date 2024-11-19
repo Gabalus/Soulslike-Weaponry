@@ -8,6 +8,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean inform_player_about_cooldown_effect = true;
     @Entry public static boolean inform_player_about_no_souls_to_collect = true;
     @Entry public static boolean inform_player_about_collected_souls = true;
+    @Entry public static boolean inform_player_about_out_of_range = true;
 
     // Config changes won't apply to generated json files/runtime so no point in having these as entries.
     public static int moonstone_ore_vein_size = 5;
@@ -75,6 +76,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean disable_recipe_chungus_staff = true;
     @Entry public static boolean disable_recipe_dark_moon_greatsword = false;
     @Entry public static boolean disable_recipe_glaive_of_hodir = false;
+    @Entry public static boolean disable_recipe_excalibur = false;
 
     @Entry public static boolean disable_recipe_arkenplate = false;
     @Entry public static boolean disable_recipe_chaos_helmet = false;
@@ -150,6 +152,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean disable_use_chungus_staff = false;
     @Entry public static boolean disable_use_dark_moon_greatsword = false;
     @Entry public static boolean disable_use_glaive_of_hodir = false;
+    @Entry public static boolean disable_use_excalibur = false;
 
     @Entry public static boolean disable_use_arkenplate = false;
     @Entry public static boolean disable_use_chaos_crown = false;
@@ -208,6 +211,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean is_fireproof_chungus_staff = false;
     @Entry public static boolean is_fireproof_dark_moon_greatsword = true;
     @Entry public static boolean is_fireproof_glaive_of_hodir = true;
+    @Entry public static boolean is_fireproof_excalibur = true;
 
     @Entry public static boolean is_fireproof_blunderbuss = false;
     @Entry public static boolean is_fireproof_gatling_gun = false;
@@ -427,6 +431,15 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean draupnir_spear_enchant_reduces_ability_cooldown = false;
     @Entry public static String draupnir_spear_enchant_reduces_ability_cooldown_id = "damage";
     @Entry public static int draupnir_spear_max_age = 400;
+    @Entry public static int excalibur_damage = 8;
+    @Entry public static float excalibur_attack_speed = 1.6f;
+    @Entry(min=0, max=1D) public static double excalibur_life_guard_percent = 0.3;
+    @Entry public static float excalibur_sonic_boom_damage = 10f;
+    @Entry public static int excalibur_sonic_boom_cooldown = 100;
+    @Entry public static float excalibur_sonic_boom_max_range = 40f;
+    @Entry public static float excalibur_sonic_boom_target_search_range = 16f;
+    @Entry public static boolean excalibur_enchant_reduces_ability_cooldown = true;
+    @Entry public static String excalibur_enchant_reduces_ability_cooldown_id = "damage";
     @Entry public static int forlorn_scythe_damage = 11;
     @Entry public static float forlorn_scythe_attack_speed = 1f;
     @Entry public static int featherlight_damage = 8;

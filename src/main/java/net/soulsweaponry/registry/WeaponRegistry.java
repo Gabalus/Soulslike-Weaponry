@@ -76,6 +76,7 @@ public class WeaponRegistry {
     public static ToolItem CHUNGUS_STAFF = new ChungusStaff(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().maxDamage(1258).rarity(Rarity.EPIC));
     public static ToolItem DARK_MOON_GREATSWORD = new DarkMoonGreatsword(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().rarity(Rarity.EPIC));
     public static ToolItem GLAIVE_OF_HODIR = new GlaiveOfHodir(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().rarity(Rarity.EPIC));
+    public static ToolItem EXCALIBUR = new Excalibur(ModToolMaterials.ECHO_SHARD, new FabricItemSettings().rarity(Rarity.EPIC));
 
     public static void init() {
         ItemRegistry.registerWeaponItem(BLUEMOON_SHORTSWORD, "bluemoon_shortsword", ConfigConstructor.disable_recipe_bluemoon_shortsword);
@@ -128,5 +129,6 @@ public class WeaponRegistry {
         ItemRegistry.registerWeaponItem(CHUNGUS_STAFF, "chungus_staff", ConfigConstructor.disable_recipe_chungus_staff);
         ItemRegistry.registerWeaponItem(DARK_MOON_GREATSWORD, "dark_moon_greatsword", ConfigConstructor.disable_recipe_dark_moon_greatsword);
         ItemRegistry.registerWeaponItem(GLAIVE_OF_HODIR, "glaive_of_hodir", ConfigConstructor.disable_recipe_glaive_of_hodir);
+        ItemRegistry.registerWeaponItem(EXCALIBUR, "excalibur", ConfigConstructor.disable_recipe_excalibur);
     }
 }

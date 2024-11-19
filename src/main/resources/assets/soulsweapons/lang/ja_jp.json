@@ -8,6 +8,7 @@
     "soulsweapons.weapon.no_freyr_sword": "There is no Freyr Sword bound to you!",
     "soulsweapons.weapon.on_cooldown": "Can't cast this ability with the Cooldown effect!",
     "soulsweapons.weapon.no_soulbound_weapon": "There is no 'Soulbound' weapon bound to you!",
+    "soulsweapons.weapon.out_of_range": "Target is out of range!",
 
     "block.soulsweapons.moonstone_block": "ムーンストーンのブロック",
     "block.soulsweapons.moonstone_ore": "ムーンストーン鉱石",
@@ -149,6 +150,7 @@
     "item.soulsweapons.chungus_staff": "Chungus Staff",
     "item.soulsweapons.dark_moon_greatsword": "Dark Moon Greatsword",
     "item.soulsweapons.glaive_of_hodir": "Glaive of Hodir",
+    "item.soulsweapons.excalibur": "Excalibur",
 
     "item.soulsweapons.big_chungus_spawn_egg": "チャンガスのスポーンエッグ",
     "item.soulsweapons.withered_demon_spawn_egg": "枯れたデーモンのスポーンエッグ",
@@ -675,6 +677,13 @@
     "tooltip.soulsweapons.ghost_glaive.1": "- Use to throw out a spectral glaive that goes",
     "tooltip.soulsweapons.ghost_glaive.2": "through walls, damaging and applying %s",
     "tooltip.soulsweapons.ghost_glaive.3": "posture loss to targets it flies through",
+    "tooltip.soulsweapons.sonic_boom": "Sonic Boom",
+    "tooltip.soulsweapons.sonic_boom.1": "- Use to shoot a §bSonic Boom§r towards your last",
+    "tooltip.soulsweapons.sonic_boom.2": "target hit if it is within %s blocks, otherwise",
+    "tooltip.soulsweapons.sonic_boom.3": "target nearest entity within %s blocks range",
+    "tooltip.soulsweapons.life_guard": "Life Guard",
+    "tooltip.soulsweapons.life_guard.1": "- %s of damage taken damages the item",
+    "tooltip.soulsweapons.life_guard.2": "instead of the user",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "絶滅したと考えられている珍しい形の魂。",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "暗く、しかしバランスの取れた色は、",
