@@ -20,6 +20,13 @@ public interface ICooldownItem {
         }
     }
 
+    /**
+     * Will still apply cooldown regardless if the player is creative or not
+     */
+    default void applyItemCooldownNoCheck(PlayerEntity player, int cooldown) {
+        player.getItemCooldownManager().set((Item) this, cooldown);
+    }
+
     default void applyEffectCooldown(PlayerEntity player, int cooldown) {
         if (!player.isCreative()) {
             player.addStatusEffect(new StatusEffectInstance(EffectRegistry.COOLDOWN, cooldown, 0));

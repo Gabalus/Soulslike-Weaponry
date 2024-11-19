@@ -58,7 +58,7 @@ public class MoonlightShortsword extends ModdedSword {
                     p_220045_0_.sendToolBreakStatus(hand);
                 }); */
                 if (itemStack.getItem() instanceof BluemoonShortsword bluemoon) {
-                    bluemoon.applyItemCooldown(user, Math.max(ConfigConstructor.bluemoon_shortsword_projectile_min_cooldown, ConfigConstructor.bluemoon_shortsword_projectile_cooldown
+                    bluemoon.applyItemCooldownNoCheck(user, Math.max(ConfigConstructor.bluemoon_shortsword_projectile_min_cooldown, ConfigConstructor.bluemoon_shortsword_projectile_cooldown
                             - bluemoon.getReduceCooldownEnchantLevel(itemStack) * 10));
                 }
 
