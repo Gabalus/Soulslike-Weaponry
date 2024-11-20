@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
+import net.soulsweaponry.datagen.advancements.AdvancementsProvider;
 import net.soulsweaponry.datagen.loot_tables.BossLootTableProvider;
 import net.soulsweaponry.datagen.recipe.WeaponRecipeProvider;
 import net.soulsweaponry.datagen.tags.EntityTagsProvider;
@@ -26,6 +27,7 @@ public class DataGeneration implements DataGeneratorEntrypoint {
         pack.addProvider(WeaponRecipeProvider::new);
         pack.addProvider(ModWorldGenerator::new);
         pack.addProvider(EntityTagsProvider::new);
+        pack.addProvider(AdvancementsProvider::new);
     }
 
     @Override
