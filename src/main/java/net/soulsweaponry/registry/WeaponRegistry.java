@@ -77,6 +77,7 @@ public class WeaponRegistry {
     public static ToolItem DARK_MOON_GREATSWORD = new DarkMoonGreatsword(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().rarity(Rarity.EPIC));
     public static ToolItem GLAIVE_OF_HODIR = new GlaiveOfHodir(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().rarity(Rarity.EPIC));
     public static ToolItem EXCALIBUR = new Excalibur(ModToolMaterials.ECHO_SHARD, new FabricItemSettings().rarity(Rarity.EPIC));
+    public static ToolItem MOONVEIL = new Moonveil(ModToolMaterials.MOONSTONE_OR_VERGLAS, new FabricItemSettings().rarity(Rarity.EPIC));
 
     public static void init() {
         ItemRegistry.registerWeaponItem(BLUEMOON_SHORTSWORD, "bluemoon_shortsword", ConfigConstructor.disable_recipe_bluemoon_shortsword);
@@ -130,5 +131,6 @@ public class WeaponRegistry {
         ItemRegistry.registerWeaponItem(DARK_MOON_GREATSWORD, "dark_moon_greatsword", ConfigConstructor.disable_recipe_dark_moon_greatsword);
         ItemRegistry.registerWeaponItem(GLAIVE_OF_HODIR, "glaive_of_hodir", ConfigConstructor.disable_recipe_glaive_of_hodir);
         ItemRegistry.registerWeaponItem(EXCALIBUR, "excalibur", ConfigConstructor.disable_recipe_excalibur);
+        ItemRegistry.registerWeaponItem(MOONVEIL, "moonveil", ConfigConstructor.disable_recipe_moonveil);
     }
 }

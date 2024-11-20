@@ -1,4 +1,4 @@
-// 1.20.1	2024-11-20T11:33:39.8898651	Marium's Soulslike Weaponry/Recipes
+// 1.20.1	2024-11-21T00:21:20.3131183	Marium's Soulslike Weaponry/Recipes
 6ac617da1c0aca4adcdebe9d40978c99d55b236d data\soulsweapons\recipes\holy_greatsword.json
 77e2400341d4a08730ea5fd56df357ee5ee94537 data\soulsweapons\advancements\recipes\combat\draugr.json
 58d40c755e5fc68eb99e6f272a31fdc9b5779338 data\soulsweapons\recipes\oleander_dye.json
@@ -14,6 +14,7 @@ ff7dc3b6eb28b3e65cfe3a0c6c22968839d5fcc1 data\soulsweapons\advancements\recipes\
 400579f8a095613a8aed773339513b23eb26f182 data\soulsweapons\recipes\soul_lamp.json
 dff35da8c5095b055cf82349d539d2fe711d0ca0 data\soulsweapons\advancements\recipes\combat\freyr_sword.json
 a8ccff474873cc4687d175752b6a52d129672d86 data\soulsweapons\advancements\recipes\combat\soul_reaper.json
+0c056d2f25bc01f5e2d7007f4c941a76369a3c27 data\soulsweapons\recipes\moonveil.json
 346da99c4a527b5b0958e92e7e21e55c27bb04a8 data\soulsweapons\recipes\skofnung.json
 466cb31ae78e1a4b4adde81ae0c261cf31677b41 data\soulsweapons\recipes\soul_ingot_chestplate.json
 71a48fe6eee0735eca574157c31bc7e69ade0e75 data\soulsweapons\recipes\whirligig_sawblade.json
@@ -121,6 +122,7 @@ ee654de5db5c2c9cbdb6a07434fdc1387b68d1dc data\soulsweapons\recipes\glass_vial.js
 6bc3de5795279f39819b0f6606f9de34bbc07700 data\soulsweapons\advancements\recipes\combat\skofnung_stone.json
 42ac206841826bf16314b3f87de20767d44442d7 data\soulsweapons\advancements\recipes\combat\chaos_orb.json
 49ded998987247ab2857fe8ba1df9028fc181f5d data\soulsweapons\recipes\featherlight.json
+59893a265a5b120ec841c72a52aab9e771ce9918 data\soulsweapons\advancements\recipes\combat\moonveil.json
 07bbc1c48acc399acdd1fe00fd34bacd1265720e data\soulsweapons\advancements\recipes\combat\darkmoon_longbow.json
 e82ffe2ae5e3b8da2b1dc7401b17508e21d75444 data\soulsweapons\recipes\chaos_orb.json
 d98c7ea3b92b65fbe894c16c6356a293a0dd626f data\soulsweapons\advancements\recipes\combat\holy_greatsword.json
@@ -130,8 +132,8 @@ bd54292b9a1b8fb68a2fd9f06e2b2285479578ca data\soulsweapons\recipes\blunderbuss.j
 9b40248006362b86f785e65634178d46611b7050 data\soulsweapons\recipes\silver_bullet_iron_ingot.json
 7339a276b2fb8fcee3e9266f16684c8a4a51682f data\soulsweapons\advancements\recipes\combat\withered_chest.json
 1675cfbd62344bf248c7b6988b5ea8083775b569 data\soulsweapons\advancements\recipes\combat\frostmourne.json
-2b178e3ef8cd0094d08a6b1b1398add3f6e03e31 data\soulsweapons\advancements\recipes\misc\molten_demon_heart.json
 c3cd0c618563cdee96f72b46dbd703f340e58beb data\soulsweapons\recipes\lich_bane.json
+2b178e3ef8cd0094d08a6b1b1398add3f6e03e31 data\soulsweapons\advancements\recipes\misc\molten_demon_heart.json
 f87e7db42177aacbb73fda487a3f15f9833777b6 data\soulsweapons\recipes\verglas_block.json
 552928dda96ed322ec8d16e2bf5cefea3fba9cd5 data\soulsweapons\advancements\recipes\combat\mjolnir.json
 5368b1c8436ac606fa2710bf0feefbda8cc7ea77 data\soulsweapons\advancements\recipes\combat\glaive_of_hodir.json

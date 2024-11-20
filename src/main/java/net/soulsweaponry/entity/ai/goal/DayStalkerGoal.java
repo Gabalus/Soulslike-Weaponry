@@ -15,7 +15,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.*;
-import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.mobs.DayStalker;
@@ -30,6 +29,7 @@ import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.CustomDeathHandler;
 import net.soulsweaponry.particles.ParticleEvents;
 import net.soulsweaponry.particles.ParticleHandler;
+import net.soulsweaponry.util.WeaponUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -405,16 +405,10 @@ public class DayStalkerGoal extends MeleeAttackGoal {
                 }
             }
             if (this.boss.isPhaseTwo()) {
-                double d = Math.min(target.getY(), this.boss.getY());
-                double e = Math.max(target.getY(), this.boss.getY()) + 1.0;
-                float f = (float)MathHelper.atan2(target.getZ() - this.boss.getZ(), target.getX() - this.boss.getX());
-                for (int i = 0; i < 16; ++i) {
-                    double h = 1.25 * (double)(i + 1);
-                    BlockPos p = this.conjureFlames(this.boss.getX() + (double)MathHelper.cos(f) * h, this.boss.getZ() + (double)MathHelper.sin(f) * h, d, e);
-                    if (p != null) {
-                        this.boss.getWorld().setBlockState(p, Blocks.FIRE.getDefaultState());
-                    }
-                }
+                double maxY = Math.min(target.getY(), this.boss.getY());
+                float rotation = (float) Math.toDegrees(MathHelper.atan2(target.getZ() - this.boss.getZ(), target.getX() - this.boss.getX()));
+                WeaponUtil.doConsumerOnLine(this.boss.getWorld(), rotation, this.boss.getPos(), maxY, 16, 1.25f,
+                        (Vec3d vec, Integer warmup, Float yaw) -> this.boss.getWorld().setBlockState(BlockPos.ofFloored(vec), Blocks.FIRE.getDefaultState()));
             }
         }
         if (this.attackStatus == 42) {
@@ -433,35 +427,6 @@ public class DayStalkerGoal extends MeleeAttackGoal {
         projectile.setPos(this.boss.getX(), this.boss.getEyeY(), this.boss.getZ());
         projectile.setVelocity(x, y, z, 1.5f, 1f);
         this.boss.getWorld().spawnEntity(projectile);
-    }
-
-    /**
-     * When used in a for loop, forms a line directly through the target. (See decimate() function when in phase 2)
-     * @param x start X * rotation
-     * @param z start Z * rotation
-     * @param maxY max Y coordinate
-     * @param y the greater Y coordinate between owner and target
-     * @return Returns a BlockPos to be used in logic, for example to place fire or cause an eruption
-     */
-    private BlockPos conjureFlames(double x, double z, double maxY, double y) {
-        BlockPos blockPos = new BlockPos((int) x, (int) y, (int) z);
-        boolean bl = false;
-        double d = 0.0;
-        do {
-            VoxelShape voxelShape;
-            BlockPos blockPos2;
-            if (!this.boss.getWorld().getBlockState(blockPos2 = blockPos.down()).isSideSolidFullSquare(this.boss.getWorld(), blockPos2, Direction.UP)) continue;
-            if (!this.boss.getWorld().isAir(blockPos) && !(voxelShape = this.boss.getWorld().getBlockState(blockPos).getCollisionShape(this.boss.getWorld(), blockPos)).isEmpty()) {
-                d = voxelShape.getMax(Direction.Axis.Y);
-            }
-            bl = true;
-            break;
-        } while ((blockPos = blockPos.down()).getY() >= MathHelper.floor(maxY) - 1);
-        if (bl) {
-            return new BlockPos(blockPos.getX(), (int) (blockPos.getY() + d), blockPos.getZ());
-        } else {
-            return null;
-        }
     }
 
     private void chaosStorm() {
@@ -792,47 +757,23 @@ public class DayStalkerGoal extends MeleeAttackGoal {
         if (this.attackStatus <= 57) {
             this.targetMaxY = Math.min(target.getY(), this.boss.getY());
             this.targetY = Math.max(target.getY(), this.boss.getY()) + 1.0;
-            this.attackRotation = (float)MathHelper.atan2(target.getZ() - this.boss.getZ(), target.getX() - this.boss.getX());
+            this.attackRotation = (float) Math.toDegrees(MathHelper.atan2(target.getZ() - this.boss.getZ(), target.getX() - this.boss.getX()));
         }
         if (this.attackStatus == 67 && this.attackRotation != 0 && this.targetY != 0 && this.targetMaxY != 0) {
-            double d = this.targetMaxY;
             double e = this.targetY;
-            float f = this.attackRotation;
-            int length = 20;
-            for (int i = 0; i <= length; ++i) {
-                double h = 1.25 * (double)(i + 1)/1.5;
-                BlockPos pos = this.conjureFlames(this.boss.getX() + (double)MathHelper.cos(f) * h, this.boss.getZ() + (double)MathHelper.sin(f) * h, d, e);
-                // Old implementation:
-                /*if (pos != null) {
-                    if (!this.boss.getWorld().isClient) {
-                        ParticleHandler.particleOutburstMap(this.boss.getWorld(), 200, pos.getX(), pos.getY(), pos.getZ(), ParticleEvents.FLAME_RUPTURE_MAP, 1f);
-                    }
-                    this.boss.getWorld().playSound(null, pos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.HOSTILE, 1f, 1f);
-                }*/
-                if (pos != null) {
-                    Vec3d vec = pos.toCenterPos();
-                    FlamePillar pillar = new FlamePillar(EntityRegistry.FLAME_PILLAR, this.boss.getWorld());
-                    pillar.setDamage(this.getModifiedDamage(40f));
-                    pillar.setPos(vec.getX(), pos.getY(), vec.getZ());
-                    pillar.setRadius(2.5f);
-                    pillar.setParticleDivergence(4f);
-                    pillar.setParticleMod(1.5f);
-                    pillar.setOwner(this.boss);
-                    pillar.setWarmup(-6);
-                    this.boss.getWorld().spawnEntity(pillar);
-                    this.boss.getWorld().playSound(null, pos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.HOSTILE, 1f, 1f);
-                    i++;
-                }
-            }
-            // Old implementation:
-            /*BlockPos lastPos = this.conjureFlames(this.boss.getX() + (double)MathHelper.cos(f) * 1.25 * (double)(length + 1), this.boss.getZ() + (double)MathHelper.sin(f) * 1.25 * (double)(length + 1), d, e);
-            if (lastPos != null) {
-                for (Entity entity : this.boss.getWorld().getOtherEntities(this.boss, new Box(this.boss.getPos().add(0, 2, 0), lastPos.toCenterPos()).expand(1D))) {
-                    if (entity instanceof LivingEntity living) {
-                        this.damageTarget(living, 40f);
-                    }
-                }
-            }*/
+            WeaponUtil.doConsumerOnLine(this.boss.getWorld(), this.attackRotation, this.boss.getPos(), this.targetMaxY, 20, 1.25f,
+                    (Vec3d vec, Integer warmup, Float yaw) -> {
+                        FlamePillar pillar = new FlamePillar(EntityRegistry.FLAME_PILLAR, this.boss.getWorld());
+                        pillar.setDamage(this.getModifiedDamage(40f));
+                        pillar.setPos(vec.getX(), vec.getY(), vec.getZ());
+                        pillar.setRadius(2.5f);
+                        pillar.setParticleDivergence(4f);
+                        pillar.setParticleMod(1.5f);
+                        pillar.setOwner(this.boss);
+                        pillar.setWarmup(-6);
+                        this.boss.getWorld().spawnEntity(pillar);
+                        this.boss.getWorld().playSound(null, BlockPos.ofFloored(vec), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.HOSTILE, 1f, 1f);
+                    });
         }
         this.checkAndReset(40, 0);
     }

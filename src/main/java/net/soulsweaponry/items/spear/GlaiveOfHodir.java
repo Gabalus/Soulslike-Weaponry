@@ -32,11 +32,10 @@ public class GlaiveOfHodir extends BladeDanceItem {
             int i = this.getMaxUseTime(stack) - remainingUseTicks;
             if (i >= 10) {
                 stack.damage(3, (LivingEntity)playerEntity, (p_220045_0_) -> p_220045_0_.sendToolBreakStatus(user.getActiveHand()));
-                GhostGlaiveEntity entity = new GhostGlaiveEntity(world, 10);
+                GhostGlaiveEntity entity = new GhostGlaiveEntity(world, playerEntity, 10);
                 entity.setDamage(ConfigConstructor.glaive_of_hodir_projectile_damage + WeaponUtil.getEnchantDamageBonus(stack));
                 entity.setPos(playerEntity.getX(), playerEntity.getEyeY() - 0.3f, playerEntity.getZ());
                 entity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, 2f, 1.0F);
-                entity.setOwner(playerEntity);
                 world.spawnEntity(entity);
                 world.playSound(playerEntity, playerEntity.getBlockPos(), SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1f, .5f);
                 this.applyItemCooldown(playerEntity, Math.max(ConfigConstructor.glaive_of_hodir_projectile_cooldown, ConfigConstructor.glaive_of_hodir_projectile_cooldown - this.getReduceCooldownEnchantLevel(stack) * 12));

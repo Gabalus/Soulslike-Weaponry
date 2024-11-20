@@ -25,14 +25,15 @@ import net.soulsweaponry.entity.mobs.Moonknight.MoonknightPhaseOne;
 import net.soulsweaponry.entity.mobs.Moonknight.MoonknightPhaseTwo;
 import net.soulsweaponry.entity.mobs.Remnant;
 import net.soulsweaponry.entity.projectile.MoonlightProjectile;
+import net.soulsweaponry.entity.projectile.noclip.HolyMoonlightPillar;
 import net.soulsweaponry.entity.util.RandomSummonPos;
 import net.soulsweaponry.registry.EffectRegistry;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
-import net.soulsweaponry.registry.WeaponRegistry;
 import net.soulsweaponry.util.CustomDamageSource;
 import net.soulsweaponry.particles.ParticleEvents;
 import net.soulsweaponry.particles.ParticleHandler;
+import net.soulsweaponry.util.WeaponUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
@@ -420,7 +421,17 @@ public class MoonknightGoal extends Goal {
         if (attackStatus == 1) this.boss.getWorld().playSound(null, this.boss.getBlockPos(), SoundRegistry.KNIGHT_CHARGE_SWORD_EVENT, SoundCategory.HOSTILE, 1f, 1f);
         if (this.attackStatus == 26) {
             float yaw = (this.yaw == 0f ? this.boss.getHeadYaw() : this.yaw) + 90;
-            WeaponRegistry.HOLY_MOONLIGHT_GREATSWORD.castSpell(this.boss, this.boss.getWorld(), WeaponRegistry.HOLY_MOONLIGHT_GREATSWORD.getDefaultStack(), this.targetPos.toCenterPos(), 14, this.getModifiedDamage(30f), 1f, yaw, 1.5f, 3.5f);
+            WeaponUtil.doConsumerOnLine(this.boss.getWorld(), yaw, this.targetPos.toCenterPos(), this.targetPos.getY(), 14, 1.75f, (Vec3d position, Integer warmup, Float yawOutput) -> {
+                HolyMoonlightPillar pillar = new HolyMoonlightPillar(EntityRegistry.HOLY_MOONLIGHT_PILLAR, this.boss.getWorld());
+                pillar.setOwner(this.boss);
+                pillar.setParticleMod(1.5f);
+                pillar.setRadius(3.5f);
+                pillar.setDamage(this.getModifiedDamage(30f));
+                pillar.setKnockUp(1f);
+                pillar.setWarmup(warmup);
+                pillar.setPos(position.getX(), position.getY(), position.getZ());
+                this.boss.getWorld().spawnEntity(pillar);
+            });
         }
         // Old implementation:
         /*if (this.attackStatus > 26 && this.attackStatus < 40) {

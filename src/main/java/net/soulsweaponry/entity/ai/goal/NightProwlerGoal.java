@@ -35,6 +35,7 @@ import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.particles.ParticleEvents;
 import net.soulsweaponry.particles.ParticleHandler;
+import net.soulsweaponry.util.WeaponUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -530,65 +531,24 @@ public class NightProwlerGoal extends MeleeAttackGoal {
             this.boss.playSound(SoundRegistry.NIGHT_SKULL_DIE, 1f, 0.75f);
         }
         if (this.attackStatus == (phase2 ? 29 : 18)) {
-            this.castSpell(target, true);
+            WeaponUtil.doConsumerOnCircle(this.boss.getWorld(), (float)MathHelper.atan2(target.getZ() - this.boss.getZ(), target.getX() - this.boss.getX()),
+                    this.boss.getPos(), Math.min(target.getY(), this.boss.getY()), 5, new Vec2f(1.5f, 1.75f),
+                    (Vec3d position, Integer warmup, Float yaw) -> this.spawnNightsEdge(position, warmup, yaw * 57.295776F));
         }
         this.checkAndReset(5, 0);
     }
 
-    protected void castSpell(LivingEntity livingEntity, boolean ripple) {
-        Vec3d start = this.boss.getPos();
-        float r;
-        double maxY = Math.min(livingEntity.getY(), this.boss.getY());
-        double y = Math.max(livingEntity.getY(), this.boss.getY()) + 1.0;
-        float f = (float)MathHelper.atan2(livingEntity.getZ() - this.boss.getZ(), livingEntity.getX() - this.boss.getX());
-        if (ripple) {
-            float yaw;
-            int i;
-            for (int waves = 0; waves < 5; waves++) {
-                for (i = 0; i < 360; i += MathHelper.floor((30f * (this.boss.isPhaseTwo() ? 2 : 1)) / (waves + 1f))) {
-                    r = 1.5f + waves * 1.75f;
-                    yaw = (float) (f + i * Math.PI / 180f);
-                    double x0 = start.getX();
-                    double z0 = start.getZ();
-                    double x = x0 + r * Math.cos(i * Math.PI / 180);
-                    double z = z0 + r * Math.sin(i * Math.PI / 180);
-                    this.conjureFangs(x, z, maxY, y, yaw, 3 * (waves + 1));
-                }
-            }
+    private void spawnNightsEdge(Vec3d position, Integer warmup, Float yaw) {
+        if (this.boss.isPhaseTwo()) {
+            NightsEdge edge = new NightsEdge(EntityRegistry.NIGHTS_EDGE, this.boss.getWorld());
+            edge.setOwner(this.boss);
+            edge.setWarmup(warmup);
+            edge.setDamage(this.getModifiedDamage(15.69f));
+            edge.setYaw(yaw);
+            edge.setPos(position.x, position.y, position.z);
+            this.boss.getWorld().spawnEntity(edge);
         } else {
-            for (int i = 0; i < 20; ++i) {
-                double h = 1.25 * (double)(i + 1);
-                this.conjureFangs(this.boss.getX() + (double)MathHelper.cos(f) * h, this.boss.getZ() + (double)MathHelper.sin(f) * h, maxY, y, f, i);
-            }
-        }
-    }
-
-    private void conjureFangs(double x, double z, double maxY, double y, float yaw, int warmup) {
-        BlockPos blockPos = new BlockPos((int) x, (int) y, (int) z);
-        boolean bl = false;
-        double d = 0.0;
-        do {
-            VoxelShape voxelShape;
-            BlockPos blockPos2;
-            if (!this.boss.getWorld().getBlockState(blockPos2 = blockPos.down()).isSideSolidFullSquare(this.boss.getWorld(), blockPos2, Direction.UP)) continue;
-            if (!this.boss.getWorld().isAir(blockPos) && !(voxelShape = this.boss.getWorld().getBlockState(blockPos).getCollisionShape(this.boss.getWorld(), blockPos)).isEmpty()) {
-                d = voxelShape.getMax(Direction.Axis.Y);
-            }
-            bl = true;
-            break;
-        } while ((blockPos = blockPos.down()).getY() >= MathHelper.floor(maxY) - 1);
-        if (bl) {
-            if (this.boss.isPhaseTwo()) {
-                NightsEdge edge = new NightsEdge(EntityRegistry.NIGHTS_EDGE, this.boss.getWorld());
-                edge.setOwner(this.boss);
-                edge.setWarmup(warmup);
-                edge.setDamage(this.getModifiedDamage(15.69f));
-                edge.setYaw(yaw * 57.295776F);
-                edge.setPos(x, (double)blockPos.getY() + d, z);
-                this.boss.getWorld().spawnEntity(edge);
-            } else {
-                this.boss.getWorld().spawnEntity(new EvokerFangsEntity(this.boss.getWorld(), x, (double)blockPos.getY() + d, z, yaw, warmup, this.boss));
-            }
+            this.boss.getWorld().spawnEntity(new EvokerFangsEntity(this.boss.getWorld(), position.x, position.y, position.z, yaw, warmup, this.boss));
         }
     }
 
@@ -597,7 +557,8 @@ public class NightProwlerGoal extends MeleeAttackGoal {
         this.boss.getNavigation().stop();
         boolean phase2 = this.boss.isPhaseTwo();
         if (this.attackStatus == (phase2 ? 16 : 23)) {
-            this.castSpell(target, false);
+            WeaponUtil.doConsumerOnLine(this.boss.getWorld(), (float) Math.toDegrees((float)MathHelper.atan2(target.getZ() - this.boss.getZ(), target.getX() - this.boss.getX())),
+                    this.boss.getPos(), Math.min(target.getY(), this.boss.getY()), 20, 1.25f, this::spawnNightsEdge);
             this.boss.playSound(SoundRegistry.SCYTHE_SWIPE, 1f, 0.7f);
         }
         if (phase2 && this.attackStatus == 43) {

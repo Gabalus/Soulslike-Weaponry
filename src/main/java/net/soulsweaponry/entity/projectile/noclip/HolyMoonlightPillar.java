@@ -73,10 +73,14 @@ public class HolyMoonlightPillar extends NoClipWarmupEntity {
         Entity entity = this.getOwner();
         if (target.isAlive() && !target.isInvulnerable() && entity instanceof LivingEntity livingEntity && target != livingEntity) {
             if (!livingEntity.isTeammate(target)) {
-                target.damage(this.getDamageSources().mobAttack((LivingEntity)entity), (float) this.getDamage() + 2 * EnchantmentHelper.getAttackDamage(this.getStack(), target.getGroup()));
+                target.damage(this.getDamageSources().mobAttack((LivingEntity)entity), this.getFinalDamage(target));
                 target.addVelocity(0, this.getKnockup(), 0);
             }
         }
+    }
+
+    public float getFinalDamage(LivingEntity target) {
+        return (float) this.getDamage() + 2 * EnchantmentHelper.getAttackDamage(this.getStack(), target.getGroup());
     }
 
     private float getKnockup() {

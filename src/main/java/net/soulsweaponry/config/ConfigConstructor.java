@@ -77,6 +77,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean disable_recipe_dark_moon_greatsword = false;
     @Entry public static boolean disable_recipe_glaive_of_hodir = false;
     @Entry public static boolean disable_recipe_excalibur = false;
+    @Entry public static boolean disable_recipe_moonveil = false;
 
     @Entry public static boolean disable_recipe_arkenplate = false;
     @Entry public static boolean disable_recipe_chaos_helmet = false;
@@ -153,6 +154,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean disable_use_dark_moon_greatsword = false;
     @Entry public static boolean disable_use_glaive_of_hodir = false;
     @Entry public static boolean disable_use_excalibur = false;
+    @Entry public static boolean disable_use_moonveil = false;
 
     @Entry public static boolean disable_use_arkenplate = false;
     @Entry public static boolean disable_use_chaos_crown = false;
@@ -212,6 +214,7 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static boolean is_fireproof_dark_moon_greatsword = true;
     @Entry public static boolean is_fireproof_glaive_of_hodir = true;
     @Entry public static boolean is_fireproof_excalibur = true;
+    @Entry public static boolean is_fireproof_moonveil = true;
 
     @Entry public static boolean is_fireproof_blunderbuss = false;
     @Entry public static boolean is_fireproof_gatling_gun = false;
@@ -547,6 +550,12 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static float moonlight_shortsword_projectile_damage = 3.0f;
     @Entry public static int moonlight_shortsword_projectile_cooldown = 13;
     @Entry public static int moonlight_ring_projectile_cooldown = 5;
+    @Entry public static int moonveil_damage = 9;
+    @Entry public static float moonveil_attack_speed = 1.6f;
+    @Entry public static float moonveil_wave_damage = 8f;
+    @Entry public static float moonveil_horizontal_damage = 12f;
+    @Entry public static float moonveil_horizontal_knockup = 0.2f;
+    @Entry public static int moonveil_ability_cooldown = 30;
     @Entry public static int nightfall_damage = 11;
     @Entry public static float nightfall_attack_speed = 1f;
     @Entry public static float nightfall_ability_damage = 18.0f;

@@ -68,5 +68,7 @@ public class EntityModelRegistry {
         EntityRendererRegistry.register(EntityRegistry.WARMUP_LIGHTNING, EmptyEntityRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.SOUL_REAPER_GHOST, SoulReaperGhostRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.GHOST_GLAIVE_TYPE, GhostGlaiveRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.MOONVEIL_WAVE, MoonveilWaveRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.MOONVEIL_HORIZONTAL, EmptyEntityRenderer::new);
     }
 }

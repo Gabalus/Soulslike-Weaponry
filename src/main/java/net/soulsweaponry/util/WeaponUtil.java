@@ -7,7 +7,9 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.*;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.World;
 import net.soulsweaponry.client.registry.KeyBindRegistry;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.items.*;
@@ -17,6 +19,7 @@ import net.soulsweaponry.items.spear.GlaiveOfHodir;
 import net.soulsweaponry.items.sword.BluemoonGreatsword;
 import net.soulsweaponry.items.sword.Skofnung;
 import net.soulsweaponry.registry.WeaponRegistry;
+import org.apache.logging.log4j.util.TriConsumer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +75,82 @@ public class WeaponUtil {
         tooltip.add(Text.translatable("tooltip.soulsweapons." + id).formatted(formatting));
         for (int i = 1; i <= lines; i++) {
             tooltip.add(Text.translatable("tooltip.soulsweapons." + id + "_description_" + i).formatted(Formatting.GRAY));
+        }
+    }
+
+    /**
+     * Use this method when doing something in circles, rippling outwards from the center
+     * @param world world
+     * @param yaw yaw of the player (often times needs to be plussed by 90)
+     * @param start start position (for example the position of the user)
+     * @param maxY maxY level the positions can go to
+     * @param ripples amount of ripples outwards from start position
+     * @param radiusAndMod vec2f containing x for base radius and y for radius modifier, often times base = 1.5 and mod = 1.75
+     * @param consumer consumer accepting {@code Vec3d, Integer and Float}, where the vec3d is the position, integer is the delayed warmup and float is the yaw output for rotating the entity
+     */
+    public static void doConsumerOnCircle(World world, float yaw, Vec3d start, double maxY, int ripples, Vec2f radiusAndMod, TriConsumer<Vec3d, Integer, Float> consumer) {
+        double y = maxY + 1.0;
+        float f = (float) Math.toRadians(yaw);
+        for (int waves = 0; waves < ripples; waves++) {
+            for (int i = 0; i < 360; i += MathHelper.floor((80f) / (waves + 1f))) {
+                float r = radiusAndMod.x + waves * radiusAndMod.y;
+                yaw = (float) (f + i * Math.PI / 180f);
+                double x0 = start.getX();
+                double z0 = start.getZ();
+                double x = x0 + r * Math.cos(i * Math.PI / 180);
+                double z = z0 + r * Math.sin(i * Math.PI / 180);
+                doConsumerOnPoint(world, x, z, maxY, y, 3 * (waves + 1), yaw, consumer);
+            }
+        }
+    }
+
+    /**
+     * Use this method when doing something in a line, for example spawn multiple {@code HolyMoonlightPillar} with delayed warmup
+     * in a straight line from the user.
+     * @param world world
+     * @param yaw yaw of the user (often times needs to be plussed by 90)
+     * @param startPos start position (for example the position of the user)
+     * @param maxY maxY level the positions can go to
+     * @param amount amount of positions to generate/range outwards => amount of entities in the line
+     * @param spacingModifier spacing modifier between each point, normally 1.75 or 1.25
+     * @param consumer consumer accepting {@code Vec3d, Integer and Float}, where the vec3d is the position, integer is the delayed warmup and float is the yaw output for rotating the entity
+     */
+    public static void doConsumerOnLine(World world, float yaw, Vec3d startPos, double maxY, int amount, float spacingModifier, TriConsumer<Vec3d, Integer, Float> consumer) {
+        double y = maxY + 1.0;
+        float f = (float) Math.toRadians(yaw);
+        for (int i = 0; i < amount; i++) {
+            double h = spacingModifier * (double)(i + 1);
+            doConsumerOnPoint(world, startPos.getX() + (double)MathHelper.cos(f) * h, startPos.getZ() + (double)MathHelper.sin(f) * h, maxY, y, -6 + i * 2, yaw, consumer);
+        }
+    }
+
+    /**
+     * Used in {@code doConsumerOnLine} method, do something on the position if valid (at right height, not inside solids blocks, etc.)
+     * @param world world
+     * @param x x position
+     * @param z z position
+     * @param maxY max height/offset of y
+     * @param y y position with offset
+     * @param warmup warmup/delay for the entity, meant for entities such as {@code HolyMoonlightPillar} that should explode after a delay
+     * @param yaw yaw of the entity for rotating the entity in the consumer
+     * @param consumer consumer accepting {@code Vec3d, Integer and Float}, where the vec3d is the position, integer is the delayed warmup and float is the yaw output for rotating the entity
+     */
+    public static void doConsumerOnPoint(World world, double x, double z, double maxY, double y, int warmup, float yaw, TriConsumer<Vec3d, Integer, Float> consumer) {
+        BlockPos blockPos = new BlockPos((int) x, (int) y, (int) z);
+        boolean bl = false;
+        double d = 0.0;
+        do {
+            VoxelShape voxelShape;
+            BlockPos blockPos2;
+            if (!world.getBlockState(blockPos2 = blockPos.down()).isSideSolidFullSquare(world, blockPos2, Direction.UP)) continue;
+            if (!world.isAir(blockPos) && !(voxelShape = world.getBlockState(blockPos).getCollisionShape(world, blockPos)).isEmpty()) {
+                d = voxelShape.getMax(Direction.Axis.Y);
+            }
+            bl = true;
+            break;
+        } while ((blockPos = blockPos.down()).getY() >= MathHelper.floor(maxY) - 1);
+        if (bl) {
+            consumer.accept(new Vec3d(x, (double)blockPos.getY() + d, z), warmup, yaw);
         }
     }
 
@@ -557,6 +636,13 @@ public class WeaponUtil {
                 tooltip.add(Text.translatable("tooltip.soulsweapons.life_guard.1", String.format("%.1f", item.getLifeGuardPercent(stack) * 100) + "%").formatted(Formatting.GRAY));
                 tooltip.add(Text.translatable("tooltip.soulsweapons.life_guard.2").formatted(Formatting.GRAY));
             }
+            case TRANSIENT_MOONLIGHT -> {
+                tooltip.add(Text.translatable("tooltip.soulsweapons.transient_moonlight").formatted(Formatting.AQUA));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.transient_moonlight.1").formatted(Formatting.GRAY));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.transient_moonlight.2").formatted(Formatting.GRAY));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.transient_moonlight.3").formatted(Formatting.GRAY));
+                tooltip.add(Text.translatable("tooltip.soulsweapons.transient_moonlight.4").formatted(Formatting.GRAY));
+            }
         }
     }
 
@@ -569,6 +655,6 @@ public class WeaponUtil {
         MOONLIGHT_ATTACK, LUNAR_HERALD, SUMMON_GHOST, SHIELD, OBLITERATE, TRIPLE_MOONLIGHT, SHADOW_STEP, DISABLE_HEAL,
         SHARPEN, IS_SHARPENED, DISABLE_DEBUFS, LUMINATE, SPIDERS_BANE, SAWBLADE, WABBAJACK, LUCK_BASED, PARRY, SKYWARD_STRIKES,
         KEYBIND_ABILITY, NIGHTS_EDGE, CHAOS_STORM, VEIL_OF_FIRE, BLIGHT, FAST_PULL, THIRD_SHOT, SLOW_PULL, MOONLIGHT_ARROW,
-        ARROW_STORM, TRANSPARENT, CHUNGUS_INFUSED, FROST_MOON, GLAIVE_DANCE, GHOST_GLAIVE, SONIC_BOOM, LIFE_GUARD
+        ARROW_STORM, TRANSPARENT, CHUNGUS_INFUSED, FROST_MOON, GLAIVE_DANCE, GHOST_GLAIVE, SONIC_BOOM, LIFE_GUARD, TRANSIENT_MOONLIGHT
     }
 }
