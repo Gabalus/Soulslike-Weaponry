@@ -26,7 +26,6 @@ public class Moonveil extends ChargeToUseItem {
             int time = this.getMaxUseTime(stack) - remainingUseTicks;
             if (time >= 10) {
                 if (player.isSneaking()) {
-                    //TODO add other sounds for moonveil wave and the slam thingy
                     MoonveilWave entity = new MoonveilWave(EntityRegistry.MOONVEIL_VERTICAL, world, user, 15);
                     entity.setPos(player.getX(), player.getEyeY() - 1f, player.getZ());
                     entity.setModelRotation(90);
@@ -34,14 +33,14 @@ public class Moonveil extends ChargeToUseItem {
                     entity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 1f, 1.0F);
                     entity.setDamage(ConfigConstructor.moonveil_horizontal_damage);
                     world.spawnEntity(entity);
-                    world.playSound(null, user.getBlockPos(), SoundRegistry.MOONLIGHT_BIG_EVENT, SoundCategory.PLAYERS, 1f, 1f);
+                    world.playSound(null, user.getBlockPos(), SoundRegistry.MOONVEIL_VERTICAL, SoundCategory.PLAYERS, 1f, 1f);
                 } else {
                     MoonveilWave entity = new MoonveilWave(world, user, 6);
                     entity.setPos(player.getX(), player.getEyeY() - 0.3f, player.getZ());
                     entity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 1.0f, 1.0F);
                     entity.setDamage(ConfigConstructor.moonveil_wave_damage);
                     world.spawnEntity(entity);
-                    world.playSound(null, user.getBlockPos(), SoundRegistry.MOONLIGHT_BIG_EVENT, SoundCategory.PLAYERS, 1f, 1f);
+                    world.playSound(null, user.getBlockPos(), SoundRegistry.MOONVEIL_HORIZONTAL, SoundCategory.PLAYERS, 1f, 1f);
                 }
                 stack.damage(3, player, (p) -> p.sendToolBreakStatus(user.getActiveHand()));
                 this.applyItemCooldown(player, ConfigConstructor.moonveil_ability_cooldown);

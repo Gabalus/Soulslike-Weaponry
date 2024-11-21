@@ -368,5 +368,17 @@
         "sounds": [
             "soulsweapons:trinity"
         ]
+    },
+    "moonveil_horizontal": {
+        "subtitle": "subtitles.soulsweapons.moonveil_horizontal",
+        "sounds": [
+            "soulsweapons:moonveil_horizontal"
+        ]
+    },
+    "moonveil_vertical": {
+        "subtitle": "subtitles.soulsweapons.moonveil_vertical",
+        "sounds": [
+            "soulsweapons:moonveil_vertical"
+        ]
     }
 }

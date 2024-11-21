@@ -350,6 +350,8 @@
     "subtitles.soulsweapons.partner_dies": "Разрывающий сердце крик",
     "subtitles.soulsweapons.darkness_rise": "Тьма поднимается",
     "subtitles.soulsweapons.trinity": "Взрыв Троицы",
+    "subtitles.soulsweapons.moonveil_horizontal": "A horizontal moonlight wave is unleashed",
+    "subtitles.soulsweapons.moonveil_vertical": "A vertical moonlight wave is unleashed",
 
     "tooltip.soulsweapons.shift": "Удерживай [§eSHIFT§r] для получения информации",
     "tooltip.soulsweapons.control": "Удерживай [§eCTRL§r] для преданий",

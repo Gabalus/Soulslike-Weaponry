@@ -349,6 +349,8 @@
   "subtitles.soulsweapons.partner_dies": "Grito desgarrador",
   "subtitles.soulsweapons.darkness_rise": "La oscuridad se eleva",
   "subtitles.soulsweapons.trinity": "Explosión de Trinidad",
+  "subtitles.soulsweapons.moonveil_horizontal": "A horizontal moonlight wave is unleashed",
+  "subtitles.soulsweapons.moonveil_vertical": "A vertical moonlight wave is unleashed",
 
   "tooltip.soulsweapons.shift": "Mantenga [§eSHIFT§r] para obtener información",
   "tooltip.soulsweapons.control": "Mantenga [§eCTRL§r] para obtener información adicional",

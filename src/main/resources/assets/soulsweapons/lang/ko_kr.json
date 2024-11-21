@@ -348,6 +348,8 @@
     "subtitles.soulsweapons.partner_dies": "가슴 아픈 비명",
     "subtitles.soulsweapons.darkness_rise": "어둠이 일어남",
     "subtitles.soulsweapons.trinity": "트리니티 폭발",
+    "subtitles.soulsweapons.moonveil_horizontal": "A horizontal moonlight wave is unleashed",
+    "subtitles.soulsweapons.moonveil_vertical": "A vertical moonlight wave is unleashed",
 
     "tooltip.soulsweapons.shift": "[§eSHIFT§r] 키를 눌러 정보를 확인하세요",
     "tooltip.soulsweapons.alt": "[§eALT§r] 키를 눌러 정보를 확인하세요",

@@ -69,6 +69,8 @@ public class SoundRegistry {
     public static SoundEvent PARTNER_DIES = registerSound("partner_dies");
     public static SoundEvent DARKNESS_RISE = registerSound("darkness_rise");
     public static SoundEvent TRINITY = registerSound("trinity");
+    public static SoundEvent MOONVEIL_HORIZONTAL = registerSound("moonveil_horizontal");
+    public static SoundEvent MOONVEIL_VERTICAL = registerSound("moonveil_vertical");
 
 	public static Identifier registerId(String name) {
 		return new Identifier(SoulsWeaponry.ModId + ":" + name);

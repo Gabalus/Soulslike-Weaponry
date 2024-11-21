@@ -349,6 +349,8 @@
     "subtitles.soulsweapons.partner_dies": "悲痛な叫び",
     "subtitles.soulsweapons.darkness_rise": "闇が立ち上る",
     "subtitles.soulsweapons.trinity": "トリニティ爆発",
+    "subtitles.soulsweapons.moonveil_horizontal": "A horizontal moonlight wave is unleashed",
+    "subtitles.soulsweapons.moonveil_vertical": "A vertical moonlight wave is unleashed",
 
     "tooltip.soulsweapons.shift": "[§eSHIFT§r] を押して詳細を表示します",
     "tooltip.soulsweapons.control": "[§eCTRL§r] を押して詳細を表示します",
