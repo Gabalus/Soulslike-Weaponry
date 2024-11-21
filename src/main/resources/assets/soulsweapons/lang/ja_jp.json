@@ -230,8 +230,8 @@
     "entity.soulsweapons.holy_moonlight_pillar": "聖なる月光の柱",
     "entity.soulsweapons.warmup_lightning": "ウォームアップライトニング",
     "entity.soulsweapons.ghost_glaive": "Ghost Glaive",
-    "entity.soulsweapons.moonveil_wave": "Moonveil Wave",
     "entity.soulsweapons.moonveil_horizontal": "Moonveil Horizontal Wave",
+    "entity.soulsweapons.moonveil_vertical": "Moonveil Vertical Wave",
 
     "death.attack.bleed": "%1$s が出血しました",
     "death.attack.bleed.player": "%1$s が出血しました",
@@ -691,7 +691,7 @@
     "tooltip.soulsweapons.transient_moonlight.1": "- Use to unleash a wide moonlight wave going",
     "tooltip.soulsweapons.transient_moonlight.2": "through blocks, damaging mobs it passes through",
     "tooltip.soulsweapons.transient_moonlight.3": "- Use while sneaking to instead shoot out a",
-    "tooltip.soulsweapons.transient_moonlight.4": "horizontal wave that goes along the ground",
+    "tooltip.soulsweapons.transient_moonlight.4": "vertical wave",
 
     "tooltip.soulsweapons.lord_soul_purple.part_1": "絶滅したと考えられている珍しい形の魂。",
     "tooltip.soulsweapons.lord_soul_purple.part_2": "暗く、しかしバランスの取れた色は、",

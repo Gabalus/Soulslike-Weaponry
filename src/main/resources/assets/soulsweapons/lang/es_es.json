@@ -230,8 +230,8 @@
   "entity.soulsweapons.holy_moonlight_pillar": "Pilar de Luz de Luna Sagrada",
   "entity.soulsweapons.warmup_lightning": "Rayo de Calentamiento",
   "entity.soulsweapons.ghost_glaive": "Ghost Glaive",
-  "entity.soulsweapons.moonveil_wave": "Moonveil Wave",
   "entity.soulsweapons.moonveil_horizontal": "Moonveil Horizontal Wave",
+  "entity.soulsweapons.moonveil_vertical": "Moonveil Vertical Wave",
 
   "death.attack.bleed": "%1$s se desangró",
   "death.attack.bleed.player": "%1$s se desangró",
@@ -691,7 +691,7 @@
   "tooltip.soulsweapons.transient_moonlight.1": "- Use to unleash a wide moonlight wave going",
   "tooltip.soulsweapons.transient_moonlight.2": "through blocks, damaging mobs it passes through",
   "tooltip.soulsweapons.transient_moonlight.3": "- Use while sneaking to instead shoot out a",
-  "tooltip.soulsweapons.transient_moonlight.4": "horizontal wave that goes along the ground",
+  "tooltip.soulsweapons.transient_moonlight.4": "vertical wave",
 
   "tooltip.soulsweapons.lord_soul_purple.part_1": "Una forma rara de almas, que se cree extinta.",
   "tooltip.soulsweapons.lord_soul_purple.part_2": "Su color oscuro pero equilibrado sugiere",

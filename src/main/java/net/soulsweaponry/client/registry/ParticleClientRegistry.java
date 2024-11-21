@@ -13,5 +13,7 @@ public class ParticleClientRegistry {
         ParticleFactoryRegistry.getInstance().register(ParticleRegistry.DARK_STAR, FlameParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ParticleRegistry.BLACK_FLAME, FlameParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ParticleRegistry.SUN_PARTICLE, FlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ParticleRegistry.MOONVEIL_PARTICLE, FlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ParticleRegistry.BLUE_FLAME, FlameParticle.Factory::new);
     }
 }

@@ -5,12 +5,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.soulsweaponry.config.ConfigConstructor;
-import net.soulsweaponry.entity.projectile.noclip.MoonveilHorizontal;
 import net.soulsweaponry.entity.projectile.noclip.MoonveilWave;
 import net.soulsweaponry.items.ChargeToUseItem;
+import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.util.WeaponUtil;
 
@@ -28,16 +27,14 @@ public class Moonveil extends ChargeToUseItem {
             if (time >= 10) {
                 if (player.isSneaking()) {
                     //TODO add other sounds for moonveil wave and the slam thingy
-                    WeaponUtil.doConsumerOnLine(world, user.getYaw() + 90, user.getPos(), user.getY() - 2, 5, 1.75f,
-                            (Vec3d position, Integer warmup, Float yaw) -> {
-                                MoonveilHorizontal entity = new MoonveilHorizontal(world, user, stack);
-                                entity.setDamage(ConfigConstructor.moonveil_horizontal_damage);
-                                entity.setKnockUp(ConfigConstructor.moonveil_horizontal_knockup);
-                                entity.setWarmup(warmup);
-                                entity.setPos(position.getX(), position.getY(), position.getZ());
-                                world.spawnEntity(entity);
-                            }
-                    );
+                    MoonveilWave entity = new MoonveilWave(EntityRegistry.MOONVEIL_VERTICAL, world, user, 15);
+                    entity.setPos(player.getX(), player.getEyeY() - 1f, player.getZ());
+                    entity.setModelRotation(90);
+                    entity.setModelTranslationY(1f);
+                    entity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 1f, 1.0F);
+                    entity.setDamage(ConfigConstructor.moonveil_horizontal_damage);
+                    world.spawnEntity(entity);
+                    world.playSound(null, user.getBlockPos(), SoundRegistry.MOONLIGHT_BIG_EVENT, SoundCategory.PLAYERS, 1f, 1f);
                 } else {
                     MoonveilWave entity = new MoonveilWave(world, user, 6);
                     entity.setPos(player.getX(), player.getEyeY() - 0.3f, player.getZ());
