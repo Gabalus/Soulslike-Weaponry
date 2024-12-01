@@ -1,3 +1,7 @@
-// 1.20.1	2024-11-21T00:21:20.3112144	Marium's Soulslike Weaponry/Advancements
+// 1.20.1	2024-12-01T14:15:43.647744	Marium's Soulslike Weaponry/Advancements
 ac04da4a0c8905ecde7570acd733fda5baca3c40 data\soulsweapons\advancements\lord_soul.json
 6e3196061981c90f86c16f17ff08eac925b5f580 data\soulsweapons\advancements\root.json
+53c6f1d28e74d2de85b95628cffa03fa2b1215e8 data\soulsweapons\advancements\all_weapons.json
+2603959c5f4baa44d4f9801f5974176e6f82298b data\soulsweapons\advancements\bluemoon_tools.json
+1a73e4506f54a1c16567cd6036c9644b4762eaf4 data\soulsweapons\advancements\moonstone.json
+756937ec27b37b9454c0e0919869ca202b45c222 data\soulsweapons\advancements\moonlight_tools.json

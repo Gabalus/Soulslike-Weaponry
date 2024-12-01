@@ -10,6 +10,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.soulsweaponry.SoulsWeaponry;
 import net.soulsweaponry.config.ConfigConstructor;
+import net.soulsweaponry.datagen.DatagenUtil;
+import net.soulsweaponry.datagen.advancements.AdvancementsProvider;
 import net.soulsweaponry.items.*;
 import net.soulsweaponry.items.armor.ChaosSet;
 import net.soulsweaponry.items.armor.WitheredArmor;
@@ -129,6 +131,16 @@ public class ItemRegistry {
 		return Registry.register(Registries.ITEM, new Identifier(SoulsWeaponry.ModId, name), item);
 	}
 
+    /**
+     * Register an item that should be included in the all_weapons advancement
+     */
+    public static <I extends Item> I registerLegendaryItem(I item, String name) {
+        if (DatagenUtil.isDatagenRunning()) {
+            AdvancementsProvider.ALL_WEAPONS.add(item);
+        }
+        return registerItem(item, name);
+    }
+
     public static <I extends Item> I registerItemRemovableRecipe(I item, String name, boolean removeRecipe) {
         RecipeHandler.RECIPE_IDS.put(new Identifier(SoulsWeaponry.ModId, name), removeRecipe);
         return registerItem(item, name);
@@ -142,6 +154,9 @@ public class ItemRegistry {
         }
     }
 
+    /**
+     * Register a weapon that has a recipe that can be disabled
+     */
     public static <I extends Item> I registerWeaponItem(I item, String name, boolean removeRecipe) {
         if (ConfigConstructor.disable_weapon_recipes) {
             return registerItemRemovableRecipe(item, name, true);
@@ -150,7 +165,20 @@ public class ItemRegistry {
         }
     }
 
+    /**
+     * Register a weapon/item that should be included in the all_weapons advancement and has a recipe that can be disabled
+     */
+    public static <I extends Item> I registerLegendaryWeapon(I item, String name, boolean removeRecipe) {
+        if (DatagenUtil.isDatagenRunning()) {
+            AdvancementsProvider.ALL_WEAPONS.add(item);
+        }
+        return registerWeaponItem(item, name, removeRecipe);
+    }
+
     public static <I extends Item> I registerGunItem(I item, String name) {
+        if (DatagenUtil.isDatagenRunning()) {
+            AdvancementsProvider.ALL_GUNS.add(item);
+        }
         return registerItemRemovableRecipe(item, name, ConfigConstructor.disable_gun_recipes);
     }
 }

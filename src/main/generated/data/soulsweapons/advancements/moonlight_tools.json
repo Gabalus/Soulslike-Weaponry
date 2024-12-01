@@ -1,0 +1,44 @@
+{
+  "parent": "soulsweapons:bluemoon_tools",
+  "criteria": {
+    "condition_0": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "soulsweapons:moonlight_greatsword"
+            ]
+          },
+          {
+            "items": [
+              "soulsweapons:moonlight_shortsword"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.soulsweapons.moonlight_tools.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "soulsweapons:moonlight_greatsword",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.soulsweapons.moonlight_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "condition_0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
