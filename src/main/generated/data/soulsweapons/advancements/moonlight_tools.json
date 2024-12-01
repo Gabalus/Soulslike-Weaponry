@@ -1,14 +1,21 @@
 {
   "parent": "soulsweapons:bluemoon_tools",
   "criteria": {
-    "condition_0": {
+    "moonlight_greatsword": {
       "conditions": {
         "items": [
           {
             "items": [
               "soulsweapons:moonlight_greatsword"
             ]
-          },
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "moonlight_shortsword": {
+      "conditions": {
+        "items": [
           {
             "items": [
               "soulsweapons:moonlight_shortsword"
@@ -37,7 +44,8 @@
   },
   "requirements": [
     [
-      "condition_0"
+      "moonlight_greatsword",
+      "moonlight_shortsword"
     ]
   ],
   "sends_telemetry_event": true

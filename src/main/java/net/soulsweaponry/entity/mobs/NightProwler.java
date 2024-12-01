@@ -426,7 +426,7 @@ public class NightProwler extends BossEntity implements GeoEntity {
                 this.darknessRiseTicks = 0;
             }
         }
-        if (this.getBlackflameSnakeLogic() != null) {
+        if (this.getBlackflameSnakeLogic() != null) {//TODO replace with calls to spawn BlackflameExplosionEntities with delay in Goal class all at once like how DayStalker spawns it's flame pillars, remember to set position and damage!
             this.getBlackflameSnakeLogic().tick(this.getWorld());
             if (this.getBlackflameSnakeLogic().isFinished()) {
                 this.setBlackflameSnakeLogic(null);

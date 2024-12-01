@@ -1,7 +1,7 @@
 {
   "parent": "soulsweapons:root",
   "criteria": {
-    "condition_0": {
+    "moonstone": {
       "conditions": {
         "items": [
           {
@@ -31,7 +31,7 @@
   },
   "requirements": [
     [
-      "condition_0"
+      "moonstone"
     ]
   ],
   "sends_telemetry_event": true

@@ -70,5 +70,6 @@ public class EntityModelRegistry {
         EntityRendererRegistry.register(EntityRegistry.GHOST_GLAIVE_TYPE, GhostGlaiveRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.MOONVEIL_HORIZONTAL, MoonveilWaveRenderer::new);
         EntityRendererRegistry.register(EntityRegistry.MOONVEIL_VERTICAL, MoonveilWaveRenderer::new);
+        EntityRendererRegistry.register(EntityRegistry.BLACKFLAME_EXPLOSION_ENTITY, EmptyEntityRenderer::new);
     }
 }

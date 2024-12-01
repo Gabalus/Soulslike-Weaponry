@@ -79,7 +79,7 @@ public class MoonveilWave extends DamagingNoClipEntity implements GeoEntity {
     }
 
     @Override
-    public void applyDamageEffects(LivingEntity target) {
+    public void applyDamageEffects(boolean wasHit, LivingEntity target) {
 
     }
 

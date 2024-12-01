@@ -232,6 +232,7 @@
     "entity.soulsweapons.ghost_glaive": "Ghost Glaive",
     "entity.soulsweapons.moonveil_horizontal": "Moonveil Horizontal Wave",
     "entity.soulsweapons.moonveil_vertical": "Moonveil Vertical Wave",
+    "entity.soulsweapons.blackflame_explosion_entity": "Blackflame Explosion",
 
     "death.attack.bleed": "%1$s が出血しました",
     "death.attack.bleed.player": "%1$s が出血しました",

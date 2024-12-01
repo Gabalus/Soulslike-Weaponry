@@ -44,12 +44,13 @@ public abstract class DamagingNoClipEntity extends NoClipEntity {
                     continue;
                 }
                 this.updateEntityDamage(living);
+                boolean wasHit;
                 if (this.getOwner() instanceof LivingEntity) {
-                    living.damage(this.getWorld().getDamageSources().mobProjectile(this, (LivingEntity) this.getOwner()), (float) this.getDamage());
+                    wasHit = living.damage(this.getWorld().getDamageSources().mobProjectile(this, (LivingEntity) this.getOwner()), (float) this.getDamage());
                 } else {
-                    living.damage(this.getWorld().getDamageSources().mobProjectile(this, null), (float) this.getDamage());
+                    wasHit = living.damage(this.getWorld().getDamageSources().mobProjectile(this, null), (float) this.getDamage());
                 }
-                this.applyDamageEffects(living);
+                this.applyDamageEffects(wasHit, living);
                 this.entitiesHit.add(living.getUuid());
             }
         }
@@ -61,7 +62,7 @@ public abstract class DamagingNoClipEntity extends NoClipEntity {
     /**
      * Apply custom effects after damage has been dealt, like adding effects.
      */
-    public abstract void applyDamageEffects(LivingEntity target);
+    public abstract void applyDamageEffects(boolean wasHit, LivingEntity target);
 
     public void updateEntityDamage(LivingEntity target) {
         this.setDamage(this.getDamage() + EnchantmentHelper.getAttackDamage(this.getStack(), target.getGroup()));

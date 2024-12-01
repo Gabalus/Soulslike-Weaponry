@@ -53,16 +53,14 @@ public class AdvancementsProvider extends FabricAdvancementProvider {
                 AdvancementFrame.CHALLENGE, true, true, false, ModTags.Items.LORD_SOUL);
         Advancement moonstone = this.generateAdvancement(consumer, "moonstone", root, ItemRegistry.MOONSTONE,
                 AdvancementFrame.TASK, true, true, false, ItemRegistry.MOONSTONE);
-        Advancement bluemoon_swords = this.generateAdvancement(consumer, "bluemoon_tools", moonstone, WeaponRegistry.BLUEMOON_GREATSWORD,
+        Advancement bluemoon_swords = this.generateAdvancementAcceptEither(consumer, "bluemoon_tools", moonstone, WeaponRegistry.BLUEMOON_GREATSWORD,
                 AdvancementFrame.TASK, true, true, false,
-                InventoryChangedCriterion.Conditions.items(WeaponRegistry.BLUEMOON_GREATSWORD, WeaponRegistry.BLUEMOON_SHORTSWORD));
-        Advancement moonlight_swords = this.generateAdvancement(consumer, "moonlight_tools", bluemoon_swords, WeaponRegistry.MOONLIGHT_GREATSWORD,
+                WeaponRegistry.BLUEMOON_GREATSWORD, WeaponRegistry.BLUEMOON_SHORTSWORD);
+        Advancement moonlight_swords = this.generateAdvancementAcceptEither(consumer, "moonlight_tools", bluemoon_swords, WeaponRegistry.MOONLIGHT_GREATSWORD,
                 AdvancementFrame.GOAL, true, true, false,
-                InventoryChangedCriterion.Conditions.items(WeaponRegistry.MOONLIGHT_GREATSWORD, WeaponRegistry.MOONLIGHT_SHORTSWORD));
+                WeaponRegistry.MOONLIGHT_GREATSWORD, WeaponRegistry.MOONLIGHT_SHORTSWORD);
         Advancement all_weapons = this.generateAdvancement(consumer, "all_weapons", moonlight_swords, ItemRegistry.LORD_SOUL_PURPLE,
                 AdvancementFrame.CHALLENGE, true, true, false, ALL_WEAPONS.toArray(Item[]::new));
-        //TODO check and see if all_weapons works fine ingame, that all items are needed
-        //TODO check and see that bluemoon/moonlight swords advancements need only one of the items (not both) ingame (see how moonlight_tools_test.json looks and delete it when done)
 
         //TODO replace all advancements with datagen ones
         //TODO delete the non generated ones
@@ -77,10 +75,10 @@ public class AdvancementsProvider extends FabricAdvancementProvider {
     public Advancement generateAdvancement(Consumer<Advancement> consumer, String advancementId, Advancement root, Item display,
                                            AdvancementFrame frame, boolean showToast, boolean announceToChat, boolean hidden, Item... itemCondition) {
         Advancement.Builder builder = this.generateAdvancementBase(root, display, advancementId, frame, showToast, announceToChat, hidden);
-        for (int i = 0; i < itemCondition.length; i++) {
+        for (Item item : itemCondition) {
             builder.criterion(
-                    "condition_" + i,
-                    InventoryChangedCriterion.Conditions.items(itemCondition[i])
+                    item.toString(),
+                    InventoryChangedCriterion.Conditions.items(item)
             );
         }
         return builder.build(consumer, SoulsWeaponry.ModId + ":" + advancementId);
@@ -92,6 +90,20 @@ public class AdvancementsProvider extends FabricAdvancementProvider {
         for (int i = 0; i < conditions.length; i++) {
             builder.criterion("condition_" + i, conditions[i]);
         }
+        return builder.build(consumer, SoulsWeaponry.ModId + ":" + advancementId);
+    }
+
+    public Advancement generateAdvancementAcceptEither(Consumer<Advancement> consumer, String advancementId, Advancement root, Item display,
+                                           AdvancementFrame frame, boolean showToast, boolean announceToChat, boolean hidden, Item... itemCondition) {
+        Advancement.Builder builder = this.generateAdvancementBase(root, display, advancementId, frame, showToast, announceToChat, hidden);
+        List<String> criteriaNames = new ArrayList<>();
+        for (Item item : itemCondition) {
+            String itemName = item.toString();
+            builder.criterion(itemName, InventoryChangedCriterion.Conditions.items(item));
+            criteriaNames.add(itemName);
+        }
+        // Single requirement to accept either of the items
+        builder.requirements(new String[][]{criteriaNames.toArray(new String[0])});
         return builder.build(consumer, SoulsWeaponry.ModId + ":" + advancementId);
     }
 
