@@ -32,7 +32,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.ai.goal.NightProwlerGoal;
-import net.soulsweaponry.entity.util.BlackflameSnakeLogic;
 import net.soulsweaponry.registry.*;
 import net.soulsweaponry.util.CustomDeathHandler;
 import net.soulsweaponry.particles.ParticleHandler;
@@ -57,7 +56,6 @@ public class NightProwler extends BossEntity implements GeoEntity {
     public int maxSpawnTicks = 50;
     public int darknessRiseTicks;
     private int[] aliveSummons = new int[0];
-    @Nullable private BlackflameSnakeLogic blackflameSnakeLogic = null;
     public static final int ATTACKS_LENGTH = Attacks.values().length;
     private static final TrackedData<Integer> ATTACKS = DataTracker.registerData(NightProwler.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Boolean> INITIATING_PHASE_2 = DataTracker.registerData(NightProwler.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -426,12 +424,6 @@ public class NightProwler extends BossEntity implements GeoEntity {
                 this.darknessRiseTicks = 0;
             }
         }
-        if (this.getBlackflameSnakeLogic() != null) {//TODO replace with calls to spawn BlackflameExplosionEntities with delay in Goal class all at once like how DayStalker spawns it's flame pillars, remember to set position and damage!
-            this.getBlackflameSnakeLogic().tick(this.getWorld());
-            if (this.getBlackflameSnakeLogic().isFinished()) {
-                this.setBlackflameSnakeLogic(null);
-            }
-        }
     }
 
     @Override
@@ -586,15 +578,6 @@ public class NightProwler extends BossEntity implements GeoEntity {
 
     public int getDarknessRiseTicks() {
         return this.darknessRiseTicks;
-    }
-
-    public void setBlackflameSnakeLogic(@Nullable BlackflameSnakeLogic object) {
-        this.blackflameSnakeLogic = object;
-    }
-
-    @Nullable
-    public BlackflameSnakeLogic getBlackflameSnakeLogic() {
-        return this.blackflameSnakeLogic;
     }
 
     @Override

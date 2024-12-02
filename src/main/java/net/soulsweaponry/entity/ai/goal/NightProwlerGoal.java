@@ -18,19 +18,15 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.*;
-import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 import net.soulsweaponry.config.ConfigConstructor;
-import net.soulsweaponry.entity.util.BlackflameSnakeLogic;
+import net.soulsweaponry.entity.projectile.noclip.*;
+import net.soulsweaponry.entity.util.BlackflameSnakeUtil;
 import net.soulsweaponry.entity.util.DeathSpiralLogic;
 import net.soulsweaponry.entity.mobs.*;
 import net.soulsweaponry.entity.projectile.MoonlightProjectile;
 import net.soulsweaponry.entity.projectile.NightsEdge;
 import net.soulsweaponry.entity.projectile.NoDragWitherSkull;
-import net.soulsweaponry.entity.projectile.noclip.BlackflameSnakeEntity;
-import net.soulsweaponry.entity.projectile.noclip.FogEntity;
-import net.soulsweaponry.entity.projectile.noclip.NoClipEntity;
-import net.soulsweaponry.entity.projectile.noclip.NightWaveEntity;
 import net.soulsweaponry.registry.EntityRegistry;
 import net.soulsweaponry.registry.SoundRegistry;
 import net.soulsweaponry.particles.ParticleEvents;
@@ -39,6 +35,7 @@ import net.soulsweaponry.util.WeaponUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class NightProwlerGoal extends MeleeAttackGoal {
     private final NightProwler boss;
@@ -132,12 +129,7 @@ public class NightProwlerGoal extends MeleeAttackGoal {
                     this.boss.setAttackAnimation(attack);
                 }
             }
-            case DIMINISHING_LIGHT, ENGULF -> this.boss.setAttackAnimation(attack);
-            case BLACKFLAME_SNAKE -> {
-                if (this.boss.getBlackflameSnakeLogic() == null) {
-                    this.boss.setAttackAnimation(attack);
-                }
-            }
+            case DIMINISHING_LIGHT, ENGULF, BLACKFLAME_SNAKE -> this.boss.setAttackAnimation(attack);
             case ECLIPSE -> {
                 if (this.boss.isPhaseTwo() && this.specialCooldown <= 0) {
                     this.boss.setAttackAnimation(attack);
@@ -818,11 +810,20 @@ public class NightProwlerGoal extends MeleeAttackGoal {
                 this.boss.setTargetPos(this.boss.getBlockPos());
                 this.boss.setParticleState(2);
                 this.aoe(this.boss.getBoundingBox().expand(2D), 35f, 2f, true);
-                this.boss.setBlackflameSnakeLogic(new BlackflameSnakeLogic(
-                        this.boss.getPos(), target.getPos(), 10f, 1, this.boss.getYaw(), this.boss.getUuid()
-                ));
-
-                BlackflameSnakeEntity entity = new BlackflameSnakeEntity(EntityRegistry.BLACKFLAME_SNAKE_ENTITY, this.boss.getWorld());
+                // Pincer explosions
+                List<List<Vec3d>> positions = BlackflameSnakeUtil.getCurvedPositions(this.boss.getYaw(), 10f, this.boss.getPos(), target.getPos());
+                for (List<Vec3d> position : positions) {
+                    for (int i = 0; i < position.size(); i++) {
+                        BlackflameExplosionEntity entity = new BlackflameExplosionEntity(this.boss.getWorld());
+                        entity.setOwner(this.boss);
+                        entity.setDamage(this.getModifiedDamage(35f));
+                        entity.setWarmup(i);
+                        entity.setPosition(position.get(i));
+                        this.boss.getWorld().spawnEntity(entity);
+                    }
+                }
+                // Center snake tracking the target
+                BlackflameSnakeEntity entity = new BlackflameSnakeEntity(this.boss.getWorld());
                 entity.setPosition(this.boss.getPos());
                 entity.setDamage(this.getModifiedDamage(30f));
                 entity.setVelocity(new Vec3d(target.getX() - (this.boss.getX()), target.getY() - this.boss.getY(), target.getZ() - this.boss.getZ()).multiply(0.2f));

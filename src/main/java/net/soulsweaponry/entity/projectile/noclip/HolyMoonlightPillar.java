@@ -14,10 +14,9 @@ import net.minecraft.world.World;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.registry.SoundRegistry;
 
-import java.util.List;
 import java.util.Random;
 
-public class HolyMoonlightPillar extends NoClipWarmupEntity {
+public class HolyMoonlightPillar extends DamagingWarmupEntity {
 
     private float knockUp = ConfigConstructor.holy_moonlight_ability_knockup;
     private static final TrackedData<Float> RADIUS = DataTracker.registerData(HolyMoonlightPillar.class, TrackedDataHandlerRegistry.FLOAT);
@@ -35,22 +34,19 @@ public class HolyMoonlightPillar extends NoClipWarmupEntity {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (!this.getWorld().isClient) {
-            this.setWarmup(this.getWarmup() - 1);
-            if (this.getWarmup() < 0) {
-                if (this.getWarmup() == -7) {
-                    List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, this.getBoundingBox().expand(0.2D));
-                    for (LivingEntity livingEntity : list) {
-                        this.damage(livingEntity);
-                    }
-                    this.getWorld().playSound(null, this.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1f, 1f);
-                    this.getWorld().playSound(null, this.getBlockPos(), SoundRegistry.MOONLIGHT_SMALL_EVENT, SoundCategory.PLAYERS, 1f, 1f);
-                    this.discard();
-                }
-            }
-        }
+    public void applyDamageEffects(boolean wasHit, LivingEntity target) {
+        target.addVelocity(0, this.getKnockup(), 0);
+    }
+
+    @Override
+    public void onTrigger() {
+        this.getWorld().playSound(null, this.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1f, 1f);
+        this.getWorld().playSound(null, this.getBlockPos(), SoundRegistry.MOONLIGHT_SMALL_EVENT, SoundCategory.PLAYERS, 1f, 1f);
+    }
+
+    @Override
+    public float getBonusDamage(LivingEntity target) {
+        return 2 * EnchantmentHelper.getAttackDamage(this.getStack(), target.getGroup());
     }
 
     @Override
@@ -67,20 +63,6 @@ public class HolyMoonlightPillar extends NoClipWarmupEntity {
             this.getWorld().addParticle(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), newX / 2, newY / 0.5f, newZ / 2);
         }
         super.onRemoved();
-    }
-
-    private void damage(LivingEntity target) {
-        Entity entity = this.getOwner();
-        if (target.isAlive() && !target.isInvulnerable() && entity instanceof LivingEntity livingEntity && target != livingEntity) {
-            if (!livingEntity.isTeammate(target)) {
-                target.damage(this.getDamageSources().mobAttack((LivingEntity)entity), this.getFinalDamage(target));
-                target.addVelocity(0, this.getKnockup(), 0);
-            }
-        }
-    }
-
-    public float getFinalDamage(LivingEntity target) {
-        return (float) this.getDamage() + 2 * EnchantmentHelper.getAttackDamage(this.getStack(), target.getGroup());
     }
 
     private float getKnockup() {

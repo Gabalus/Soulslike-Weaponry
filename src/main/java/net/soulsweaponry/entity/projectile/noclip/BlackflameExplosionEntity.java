@@ -3,14 +3,21 @@ package net.soulsweaponry.entity.projectile.noclip;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import net.soulsweaponry.particles.ParticleEvents;
 import net.soulsweaponry.particles.ParticleHandler;
+import net.soulsweaponry.registry.EntityRegistry;
 
-public class BlackflameExplosionEntity extends DamagingNoClipEntity {
+public class BlackflameExplosionEntity extends DamagingWarmupEntity {
 
     public BlackflameExplosionEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    public BlackflameExplosionEntity(World world) {
+        super(EntityRegistry.BLACKFLAME_EXPLOSION_ENTITY, world);
     }
 
     @Override
@@ -18,6 +25,11 @@ public class BlackflameExplosionEntity extends DamagingNoClipEntity {
         if (wasHit) {
             target.addVelocity(0, 1f, 0);
         }
+    }
+
+    @Override
+    public void onTrigger() {
+        this.getWorld().playSound(null, this.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.HOSTILE, 1f, 1f);
     }
 
     @Override

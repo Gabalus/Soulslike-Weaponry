@@ -13,10 +13,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.soulsweaponry.registry.SoundRegistry;
 
-import java.util.List;
 import java.util.Random;
 
-public class FlamePillar extends NoClipWarmupEntity {
+public class FlamePillar extends DamagingWarmupEntity {
 
     private static final TrackedData<Float> RADIUS = DataTracker.registerData(FlamePillar.class, TrackedDataHandlerRegistry.FLOAT);
     private static final TrackedData<Float> PARTICLE_MOD = DataTracker.registerData(FlamePillar.class, TrackedDataHandlerRegistry.FLOAT);
@@ -35,23 +34,17 @@ public class FlamePillar extends NoClipWarmupEntity {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (!this.getWorld().isClient) {
-            this.setWarmup(this.getWarmup() - 1);
-            if (this.getWarmup() < 0) {
-                if (this.getWarmup() == -7) {
-                    List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, this.getBoundingBox().expand(0.2D));
-                    for (LivingEntity livingEntity : list) {
-                        this.damage(livingEntity);
-                    }
-                    this.getWorld().playSound(null, this.getBlockPos(), SoundRegistry.DAY_STALKER_CHAOS_STORM, SoundCategory.HOSTILE, 1f, 1f);
-                    if (this.getWorld().getBlockState(this.getBlockPos()).isAir()) {
-                        this.getWorld().setBlockState(this.getBlockPos(), Blocks.FIRE.getDefaultState());
-                    }
-                    this.discard();
-                }
-            }
+    public void applyDamageEffects(boolean wasHit, LivingEntity target) {
+        if (wasHit) {
+            target.addVelocity(0, 0.5f, 0);
+        }
+    }
+
+    @Override
+    public void onTrigger() {
+        this.getWorld().playSound(null, this.getBlockPos(), SoundRegistry.DAY_STALKER_CHAOS_STORM, SoundCategory.HOSTILE, 1f, 1f);
+        if (this.getWorld().getBlockState(this.getBlockPos()).isAir()) {
+            this.getWorld().setBlockState(this.getBlockPos(), Blocks.FIRE.getDefaultState());
         }
     }
 
@@ -70,17 +63,6 @@ public class FlamePillar extends NoClipWarmupEntity {
             this.getWorld().addParticle(ParticleTypes.FLAME, this.getX(), this.getY(), this.getZ(), newX / 4, newY / 0.5f, newZ / 4);
         }
         super.onRemoved();
-    }
-
-    private void damage(LivingEntity target) {
-        Entity entity = this.getOwner();
-        if (target.isAlive() && !target.isInvulnerable() && entity instanceof LivingEntity livingEntity && target != livingEntity) {
-            if (!livingEntity.isTeammate(target)) {
-                if (target.damage(this.getDamageSources().mobAttack((LivingEntity) entity), (float) this.getDamage())) {
-                    target.addVelocity(0, 0.5f, 0);
-                }
-            }
-        }
     }
 
     public void setRadius(float radius) {

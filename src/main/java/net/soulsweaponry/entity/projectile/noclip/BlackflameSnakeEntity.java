@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import net.soulsweaponry.entity.mobs.NightProwler;
 import net.soulsweaponry.particles.ParticleEvents;
 import net.soulsweaponry.particles.ParticleHandler;
+import net.soulsweaponry.registry.EntityRegistry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -28,6 +29,10 @@ public class BlackflameSnakeEntity extends NoClipEntity {
         super(entityType, world);
     }
 
+    public BlackflameSnakeEntity(World world) {
+        super(EntityRegistry.BLACKFLAME_SNAKE_ENTITY, world);
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -38,6 +43,7 @@ public class BlackflameSnakeEntity extends NoClipEntity {
                 double g = (target.getBodyY(0.5) - (this.getBodyY(0.5D))) / 4f;
                 double h = target.getZ() - this.getZ();
                 this.setVelocity(f, g, h, 0.3f, 1f);
+                this.velocityModified = true;
             }
             if (this.age % 4 == 0) {
                 for (Entity entity : this.getWorld().getOtherEntities(this, this.getBoundingBox())) {
