@@ -141,26 +141,31 @@ public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindA
                     player.sendMessage(Text.translatableWithFallback("soulsweapons.weapon.on_cooldown", "Can't cast this ability with the Cooldown effect!"), true);
                 }
             } else {
+                // Detonate logic
+                // Damage nearby entities first, as you did
                 Box box = player.getBoundingBox().expand(3);
                 List<Entity> entities = world.getOtherEntities(player, box);
                 float power = ConfigConstructor.draupnir_spear_projectile_damage;
                 for (Entity entity : entities) {
-                    if (entity instanceof LivingEntity) {
-                        entity.damage(world.getDamageSources().mobAttack(player), power + EnchantmentHelper.getAttackDamage(stack, ((LivingEntity) entity).getGroup()));
-                        entity.addVelocity(0, .1f, 0);
+                    if (entity instanceof LivingEntity living) {
+                        living.damage(world.getDamageSources().mobAttack(player), power + EnchantmentHelper.getAttackDamage(stack, living.getGroup()));
+                        living.addVelocity(0, .1f, 0);
                     }
                 }
                 ParticleHandler.particleOutburstMap(world, 250, player.getX(), player.getY(), player.getZ(), ParticleEvents.DEFAULT_GRAND_SKYFALL_MAP, 0.5f);
                 world.playSound(null, player.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1f, 1f);
                 this.applyItemCooldown(player, this.getScaledCooldownExplode(stack));
+
+                // Now detonate the stored spears
                 if (stack.hasNbt() && stack.getNbt().contains(DraupnirSpear.SPEARS_ID)) {
                     int[] ids = stack.getNbt().getIntArray(DraupnirSpear.SPEARS_ID);
                     for (int id : ids) {
                         Entity entity = world.getEntityById(id);
                         if (entity instanceof DraupnirSpearEntity spear) {
-                            spear.detonate();
+                            spear.detonate(); // This causes the explosion at spear's location
                         }
                     }
+                    // Clear the list after detonation
                     stack.getNbt().putIntArray(DraupnirSpear.SPEARS_ID, new int[0]);
                 }
             }

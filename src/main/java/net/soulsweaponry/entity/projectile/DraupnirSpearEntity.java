@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -31,11 +32,11 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
 public class DraupnirSpearEntity extends PersistentProjectileEntity implements GeoEntity {
-
     private static final TrackedData<Boolean> ENCHANTED;
     private final ItemStack stack;
     private final AnimatableInstanceCache factory = new SingletonAnimatableInstanceCache(this);
     private boolean dealtDamage;
+    private LivingEntity stuckEntity;
 
     public DraupnirSpearEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -49,51 +50,83 @@ public class DraupnirSpearEntity extends PersistentProjectileEntity implements G
     }
 
     public void detonate() {
-        if (this.getOwner() != null && this.getBlockPos() != null && !getWorld().isClient) {
-            float power = ConfigConstructor.draupnir_spear_detonate_power + ((float) EnchantmentHelper.getLevel(Enchantments.SHARPNESS, asItemStack()) / 2.5f);
-            this.getWorld().createExplosion(this.getOwner(), this.getX(), this.getY(), this.getZ(), power, false, World.ExplosionSourceType.NONE);
+        if (this.getOwner() != null && this.getBlockPos() != null && !this.getWorld().isClient) {
+            float power = ConfigConstructor.draupnir_spear_detonate_power
+                    + ((float) EnchantmentHelper.getLevel(Enchantments.SHARPNESS, asItemStack()) / 2.5f);
+
+            this.getWorld().createExplosion(
+                    this.getOwner(),
+                    this.getX(), this.getY(), this.getZ(),
+                    power,
+                    false,
+                    World.ExplosionSourceType.NONE
+            );
+
             if (power > 2f) {
-                for (Entity entity : getWorld().getOtherEntities(this.getOwner(), this.getBoundingBox().expand(power))) {
+                for (Entity entity : this.getWorld().getOtherEntities(this.getOwner(), this.getBoundingBox().expand(power))) {
                     if (entity instanceof LivingEntity living) {
                         living.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 100, MathHelper.floor(power - 2)));
                     }
                 }
             }
+
             this.remove(RemovalReason.DISCARDED);
         }
     }
+
+
+
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
         float f = ConfigConstructor.draupnir_spear_projectile_damage;
-        if (entity == null) {
-            return;
-        }
         if (entity instanceof LivingEntity livingEntity) {
             f += EnchantmentHelper.getAttackDamage(stack, livingEntity.getGroup());
         }
 
-        Entity entity2 = this.getOwner();
-        DamageSource damageSource = this.getWorld().getDamageSources().thrown(this, entity2);
+        Entity owner = this.getOwner();
+        DamageSource damageSource = this.getWorld().getDamageSources().thrown(this, owner);
         this.dealtDamage = true;
         SoundEvent soundEvent = SoundEvents.ITEM_TRIDENT_HIT;
+
         if (entity.damage(damageSource, f)) {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;
             }
-            if (entity instanceof LivingEntity livingEntity2) {
-                if (entity2 instanceof LivingEntity) {
-                    EnchantmentHelper.onUserDamaged(livingEntity2, entity2);
-                    EnchantmentHelper.onTargetDamaged((LivingEntity)entity2, livingEntity2);
+            if (entity instanceof LivingEntity livingHitEntity) {
+                if (owner instanceof LivingEntity livingOwner) {
+                    EnchantmentHelper.onUserDamaged(livingHitEntity, owner);
+                    EnchantmentHelper.onTargetDamaged(livingOwner, livingHitEntity);
                 }
-                this.onHit(livingEntity2);
-            }
-        }
+                this.onHit(livingHitEntity);
 
-        this.setVelocity(this.getVelocity().multiply(-0.01D, -0.1D, -0.01D));
-        float g = 1.0F;
-        this.playSound(soundEvent, g, 1.0F);
+                // Increase stuck arrow count for visual indication
+                if (!this.getWorld().isClient && this.getPierceLevel() <= 0) {
+                    livingHitEntity.setStuckArrowCount(livingHitEntity.getStuckArrowCount() + 1);
+                }
+
+                // Instead of discarding, we "stick" the spear inside the entity
+                // Make the spear no-clip and set it to the entity's location
+                this.setNoClip(true);
+                this.setVelocity(Vec3d.ZERO);
+                // Position the spear roughly at the center of the target
+                this.updatePosition(livingHitEntity.getX(), livingHitEntity.getBodyY(0.5), livingHitEntity.getZ());
+
+                // Optional: Make the spear silent/invisible if desired
+                // this.setInvisible(true);
+
+                // The spear now remains inside the entity until detonated.
+                // The entity ID is already stored via the item code when spawned, so no discard here.
+                stuckEntity = livingHitEntity;
+            }
+
+            this.playSound(soundEvent, 1.0F, 1.0F);
+        } else {
+            // If no damage dealt, just bounce off slightly
+            this.setVelocity(this.getVelocity().multiply(-0.01D, -0.1D, -0.01D));
+            this.playSound(soundEvent, 1.0F, 1.0F);
+        }
     }
 
     @Override
@@ -102,15 +135,28 @@ public class DraupnirSpearEntity extends PersistentProjectileEntity implements G
         this.dataTracker.startTracking(ENCHANTED, false);
     }
 
+    @Override
     public void tick() {
-        if (this.inGroundTime > 4) {
-            this.dealtDamage = true;
-        }
-        if (this.age > ConfigConstructor.draupnir_spear_max_age) {
-            this.remove(RemovalReason.DISCARDED);
-        }
         super.tick();
+        if (this.isNoClip() && this.stuckEntity != null) {
+            this.setPosition(stuckEntity.getX(), stuckEntity.getBodyY(0.5), stuckEntity.getZ());
+            this.velocityDirty = true;
+
+            float width = this.getWidth();
+            float height = this.getHeight();
+            double x = this.getX();
+            double y = this.getY();
+            double z = this.getZ();
+
+            this.setBoundingBox(new Box(
+                    x - (width / 2), y,
+                    z - (width / 2),
+                    x + (width / 2), y + height,
+                    z + (width / 2)
+            ));
+        }
     }
+
 
     @Override
     protected ItemStack asItemStack() {
@@ -118,6 +164,7 @@ public class DraupnirSpearEntity extends PersistentProjectileEntity implements G
     }
 
     @Nullable
+    @Override
     protected EntityHitResult getEntityCollision(Vec3d currentPosition, Vec3d nextPosition) {
         return this.dealtDamage ? null : super.getEntityCollision(currentPosition, nextPosition);
     }
