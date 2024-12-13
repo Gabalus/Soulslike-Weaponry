@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegistryObject;
+import net.soulsweaponry.attributes.AttributesRegistry;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.config.MidnightConfig;
 import net.soulsweaponry.entity.mobs.DarkSorcerer;
@@ -55,6 +56,7 @@ public class SoulsWeaponry {
         GunRegistry.register();
         EntityRegistry.register(eventBus);
         ItemRegistry.register(eventBus);
+        AttributesRegistry.register(eventBus);
 
         eventBus.addListener(this::setup);
 

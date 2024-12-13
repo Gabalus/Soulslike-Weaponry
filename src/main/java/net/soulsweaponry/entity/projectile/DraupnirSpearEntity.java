@@ -147,7 +147,7 @@ public class DraupnirSpearEntity extends PersistentProjectileEntity implements G
             double x = this.getX();
             double y = this.getY();
             double z = this.getZ();
-
+this.setInvisible(true);
             this.setBoundingBox(new Box(
                     x - (width / 2), y,
                     z - (width / 2),

@@ -1,17 +1,21 @@
 package net.soulsweaponry.events;
 
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.resource.ResourcePackProfile;
 import net.minecraft.resource.ResourcePackSource;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.text.Text;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.resource.PathPackResources;
 import net.soulsweaponry.SoulsWeaponry;
+import net.soulsweaponry.attributes.AttributesRegistry;
 import net.soulsweaponry.entity.mobs.*;
 import net.soulsweaponry.entity.projectile.NightsEdge;
 import net.soulsweaponry.networking.ModMessages;
@@ -43,6 +47,11 @@ public class ModBusEvents {
         event.put(EntityRegistry.NIGHT_PROWLER.get(), NightProwler.createBossAttributes().build());
         event.put(EntityRegistry.WARMTH_ENTITY.get(), WarmthEntity.createEntityAttributes().build());
         event.put(EntityRegistry.NIGHTS_EDGE.get(), NightsEdge.createAttributes().build());
+    }
+
+    @SubscribeEvent
+    public static void modifyEntityAttributes(EntityAttributeModificationEvent event){
+        event.add(EntityType.PLAYER, AttributesRegistry.DRAUPNIR_DETONATE.get());
     }
 
     @SubscribeEvent

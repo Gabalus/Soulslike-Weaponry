@@ -23,6 +23,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.soulsweaponry.attributes.AttributesRegistry;
 import net.soulsweaponry.client.renderer.item.DraupnirSpearItemRenderer;
 import net.soulsweaponry.config.ConfigConstructor;
 import net.soulsweaponry.entity.projectile.DraupnirSpearEntity;
@@ -143,32 +144,33 @@ public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindA
             } else {
                 // Detonate logic
                 // Damage nearby entities first, as you did
-                Box box = player.getBoundingBox().expand(3);
-                List<Entity> entities = world.getOtherEntities(player, box);
-                float power = ConfigConstructor.draupnir_spear_projectile_damage;
-                for (Entity entity : entities) {
-                    if (entity instanceof LivingEntity living) {
-                        living.damage(world.getDamageSources().mobAttack(player), power + EnchantmentHelper.getAttackDamage(stack, living.getGroup()));
-                        living.addVelocity(0, .1f, 0);
-                    }
-                }
-                ParticleHandler.particleOutburstMap(world, 250, player.getX(), player.getY(), player.getZ(), ParticleEvents.DEFAULT_GRAND_SKYFALL_MAP, 0.5f);
-                world.playSound(null, player.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1f, 1f);
-                this.applyItemCooldown(player, this.getScaledCooldownExplode(stack));
-
-                // Now detonate the stored spears
-                if (stack.hasNbt() && stack.getNbt().contains(DraupnirSpear.SPEARS_ID)) {
-                    int[] ids = stack.getNbt().getIntArray(DraupnirSpear.SPEARS_ID);
-                    for (int id : ids) {
-                        Entity entity = world.getEntityById(id);
-                        if (entity instanceof DraupnirSpearEntity spear) {
-                            spear.detonate(); // This causes the explosion at spear's location
+                if(player.getAttributes().getBaseValue(AttributesRegistry.DRAUPNIR_DETONATE.get())==1) {
+                    Box box = player.getBoundingBox().expand(3);
+                    List<Entity> entities = world.getOtherEntities(player, box);
+                    float power = ConfigConstructor.draupnir_spear_projectile_damage;
+                    for (Entity entity : entities) {
+                        if (entity instanceof LivingEntity living) {
+                            living.damage(world.getDamageSources().mobAttack(player), power + EnchantmentHelper.getAttackDamage(stack, living.getGroup()));
+                            living.addVelocity(0, .1f, 0);
                         }
                     }
-                    // Clear the list after detonation
-                    stack.getNbt().putIntArray(DraupnirSpear.SPEARS_ID, new int[0]);
-                }
-            }
+                    ParticleHandler.particleOutburstMap(world, 250, player.getX(), player.getY(), player.getZ(), ParticleEvents.DEFAULT_GRAND_SKYFALL_MAP, 0.5f);
+                    world.playSound(null, player.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1f, 1f);
+                    this.applyItemCooldown(player, this.getScaledCooldownExplode(stack));
+
+                    // Now detonate the stored spears
+                    if (stack.hasNbt() && stack.getNbt().contains(DraupnirSpear.SPEARS_ID)) {
+                        int[] ids = stack.getNbt().getIntArray(DraupnirSpear.SPEARS_ID);
+                        for (int id : ids) {
+                            Entity entity = world.getEntityById(id);
+                            if (entity instanceof DraupnirSpearEntity spear) {
+                                spear.detonate(); // This causes the explosion at spear's location
+                            }
+                        }
+                        // Clear the list after detonation
+                        stack.getNbt().putIntArray(DraupnirSpear.SPEARS_ID, new int[0]);
+                    }
+                }}
         }
     }
 
