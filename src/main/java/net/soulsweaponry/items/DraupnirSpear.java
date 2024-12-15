@@ -63,7 +63,21 @@ public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindA
                 world.spawnEntity(entity);
                 world.playSoundFromEntity(null, entity, SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 this.saveSpearData(stack, entity);
-                this.applyItemCooldown(playerEntity, this.getScaledCooldownThrow(stack));
+
+                if (stack.hasNbt() && stack.getNbt().contains(SPEARS_ID)) {
+                    int[] arr = stack.getNbt().getIntArray(SPEARS_ID);
+                    List<Integer> ids = WeaponUtil.arrayToList(arr);
+                    if (ids.size() > user.getAttributes().getValue(AttributesRegistry.MAX_DRAUPNIR_SPEARS.get())) {
+                        int oldestId = ids.remove(0);
+                        stack.getNbt().putIntArray(SPEARS_ID, ids.stream().mapToInt(Integer::intValue).toArray());
+                        Entity oldestEntity = world.getEntityById(oldestId);
+                        if (oldestEntity != null) {
+                            oldestEntity.remove(Entity.RemovalReason.DISCARDED);
+                        }
+                    }
+                }
+
+                this.applyItemCooldown(playerEntity, (int) user.getAttributes().getValue(AttributesRegistry.DRAUPNIR_THROW_COOLDOWN.get())- this.getReduceCooldownEnchantLevel(stack) * 5);
                 stack.damage(1, (LivingEntity)playerEntity, (p_220045_0_) -> p_220045_0_.sendToolBreakStatus(user.getActiveHand()));
             }
         }
@@ -88,7 +102,6 @@ public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindA
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             private DraupnirSpearItemRenderer renderer = null;
-            // Don't instantiate until ready. This prevents race conditions breaking things
             @Override public BuiltinModelItemRenderer getCustomRenderer() {
                 if (this.renderer == null)
                     this.renderer = new DraupnirSpearItemRenderer();
@@ -111,14 +124,37 @@ public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindA
                 ids = WeaponUtil.arrayToList(arr);
             }
             ids.add(entity.getId());
-            stack.getNbt().putIntArray(SPEARS_ID, ids);
+            stack.getNbt().putIntArray(SPEARS_ID, ids.stream().mapToInt(Integer::intValue).toArray());
         }
     }
 
     @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        if (!world.isClient && entity instanceof PlayerEntity player) {
+
+            boolean isHolding = (player.getMainHandStack() == stack || player.getOffHandStack() == stack);
+
+            if (!isHolding && stack.hasNbt() && stack.getNbt().contains(SPEARS_ID)) {
+                int[] ids = stack.getNbt().getIntArray(SPEARS_ID);
+
+                for (int id : ids) {
+                    Entity spearEntity = world.getEntityById(id);
+                    if (spearEntity != null) {
+                        spearEntity.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
+
+                stack.getNbt().putIntArray(SPEARS_ID, new int[0]);
+            }
+        }
+        super.inventoryTick(stack, world, entity, slot, selected);
+    }
+
+
+    @Override
     public void useKeybindAbilityServer(ServerWorld world, ItemStack stack, PlayerEntity player) {
         if (!player.getItemCooldownManager().isCoolingDown(stack.getItem())) {
-            if (player.isSneaking()) {
+            if (player.isSneaking() && player.getAttributes().getValue(AttributesRegistry.DRAUPNIR_SUMMON.get())==1) {
                 if (!player.hasStatusEffect(EffectRegistry.COOLDOWN.get())) {
                     int r = 4;
                     world.playSound(null, player.getBlockPos(), SoundEvents.ENTITY_ELDER_GUARDIAN_CURSE, SoundCategory.PLAYERS, 1f, 1f);
@@ -135,16 +171,28 @@ public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindA
                         entity.pickupType = PersistentProjectileEntity.PickupPermission.DISALLOWED;
                         world.spawnEntity(entity);
                         this.saveSpearData(stack, entity);
+
+                        if (stack.hasNbt() && stack.getNbt().contains(SPEARS_ID)) {
+                            int[] arr = stack.getNbt().getIntArray(SPEARS_ID);
+                            List<Integer> ids = WeaponUtil.arrayToList(arr);
+                            if (ids.size() > player.getAttributes().getValue(AttributesRegistry.MAX_DRAUPNIR_SPEARS.get())) {
+                                int oldestId = ids.remove(0);
+                                stack.getNbt().putIntArray(SPEARS_ID, ids.stream().mapToInt(Integer::intValue).toArray());
+                                Entity oldestEntity = world.getEntityById(oldestId);
+                                if (oldestEntity != null) {
+                                    oldestEntity.remove(Entity.RemovalReason.DISCARDED);
+                                }
+                            }
+                        }
+
                         ParticleHandler.particleOutburst(world, 10, x, player.getY() + 5, z, ParticleTypes.CLOUD, new Vec3d(4, 4, 4), 0.5f);
                     }
-                    if (!player.isCreative()) player.addStatusEffect(new StatusEffectInstance(EffectRegistry.COOLDOWN.get(), this.getScaledCooldownSummon(stack), 0));
+                    if (!player.isCreative()) player.addStatusEffect(new StatusEffectInstance(EffectRegistry.COOLDOWN.get(), (int) player.getAttributes().getValue(AttributesRegistry.DRAUPNIR_SUMMON_COOLDOWN.get()), 0));
                 } else if (ConfigConstructor.inform_player_about_cooldown_effect) {
                     player.sendMessage(Text.translatableWithFallback("soulsweapons.weapon.on_cooldown", "Can't cast this ability with the Cooldown effect!"), true);
                 }
             } else {
-                // Detonate logic
-                // Damage nearby entities first, as you did
-                if(player.getAttributes().getBaseValue(AttributesRegistry.DRAUPNIR_DETONATE.get())==1) {
+                if(player.getAttributes().getValue(AttributesRegistry.DRAUPNIR_STOMP.get())==1) {
                     Box box = player.getBoundingBox().expand(3);
                     List<Entity> entities = world.getOtherEntities(player, box);
                     float power = ConfigConstructor.draupnir_spear_projectile_damage;
@@ -156,21 +204,22 @@ public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindA
                     }
                     ParticleHandler.particleOutburstMap(world, 250, player.getX(), player.getY(), player.getZ(), ParticleEvents.DEFAULT_GRAND_SKYFALL_MAP, 0.5f);
                     world.playSound(null, player.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 1f, 1f);
-                    this.applyItemCooldown(player, this.getScaledCooldownExplode(stack));
+                }
 
-                    // Now detonate the stored spears
+                if(player.getAttributes().getValue(AttributesRegistry.DRAUPNIR_DETONATE.get())==1) {
+                    this.applyItemCooldown(player, (int) player.getAttributes().getValue(AttributesRegistry.DRAUPNIR_DETONATE_COOLDOWN.get())-  this.getReduceCooldownEnchantLevelAbility(stack) * 20);
                     if (stack.hasNbt() && stack.getNbt().contains(DraupnirSpear.SPEARS_ID)) {
                         int[] ids = stack.getNbt().getIntArray(DraupnirSpear.SPEARS_ID);
                         for (int id : ids) {
                             Entity entity = world.getEntityById(id);
                             if (entity instanceof DraupnirSpearEntity spear) {
-                                spear.detonate(); // This causes the explosion at spear's location
+                                spear.detonate();
                             }
                         }
-                        // Clear the list after detonation
                         stack.getNbt().putIntArray(DraupnirSpear.SPEARS_ID, new int[0]);
                     }
-                }}
+                }
+            }
         }
     }
 
@@ -209,18 +258,4 @@ public class DraupnirSpear extends ChargeToUseItem implements GeoItem, IKeybindA
         return 0;
     }
 
-    protected int getScaledCooldownThrow(ItemStack stack) {
-        int base = ConfigConstructor.draupnir_spear_throw_cooldown;
-        return Math.max(ConfigConstructor.draupnir_spear_throw_min_cooldown, base - this.getReduceCooldownEnchantLevel(stack) * 5);
-    }
-
-    protected int getScaledCooldownSummon(ItemStack stack) {
-        int base = ConfigConstructor.draupnir_spear_summon_spears_cooldown;
-        return Math.max(ConfigConstructor.draupnir_spear_summon_spears_min_cooldown, base - this.getReduceCooldownEnchantLevelAbility(stack) * 20);
-    }
-
-    protected int getScaledCooldownExplode(ItemStack stack) {
-        int base = ConfigConstructor.draupnir_spear_detonate_cooldown;
-        return Math.max(ConfigConstructor.draupnir_spear_detonate_min_cooldown, base - this.getReduceCooldownEnchantLevelAbility(stack) * 7);
-    }
 }

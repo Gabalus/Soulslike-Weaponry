@@ -52,6 +52,12 @@ public class ModBusEvents {
     @SubscribeEvent
     public static void modifyEntityAttributes(EntityAttributeModificationEvent event){
         event.add(EntityType.PLAYER, AttributesRegistry.DRAUPNIR_DETONATE.get());
+        event.add(EntityType.PLAYER, AttributesRegistry.MAX_DRAUPNIR_SPEARS.get());
+        event.add(EntityType.PLAYER, AttributesRegistry.DRAUPNIR_STOMP.get());
+        event.add(EntityType.PLAYER, AttributesRegistry.DRAUPNIR_SUMMON.get());
+        event.add(EntityType.PLAYER, AttributesRegistry.DRAUPNIR_SUMMON_COOLDOWN.get());
+        event.add(EntityType.PLAYER, AttributesRegistry.DRAUPNIR_DETONATE_COOLDOWN.get());
+        event.add(EntityType.PLAYER, AttributesRegistry.DRAUPNIR_THROW_COOLDOWN.get());
     }
 
     @SubscribeEvent

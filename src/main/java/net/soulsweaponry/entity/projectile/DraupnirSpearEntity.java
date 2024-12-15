@@ -38,6 +38,7 @@ public class DraupnirSpearEntity extends PersistentProjectileEntity implements G
     private boolean dealtDamage;
     private LivingEntity stuckEntity;
 
+
     public DraupnirSpearEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
         this.stack = new ItemStack(WeaponRegistry.DRAUPNIR_SPEAR.get());
@@ -74,9 +75,6 @@ public class DraupnirSpearEntity extends PersistentProjectileEntity implements G
         }
     }
 
-
-
-
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
@@ -101,29 +99,23 @@ public class DraupnirSpearEntity extends PersistentProjectileEntity implements G
                 }
                 this.onHit(livingHitEntity);
 
-                // Increase stuck arrow count for visual indication
+
                 if (!this.getWorld().isClient && this.getPierceLevel() <= 0) {
                     livingHitEntity.setStuckArrowCount(livingHitEntity.getStuckArrowCount() + 1);
                 }
 
-                // Instead of discarding, we "stick" the spear inside the entity
-                // Make the spear no-clip and set it to the entity's location
+
                 this.setNoClip(true);
                 this.setVelocity(Vec3d.ZERO);
-                // Position the spear roughly at the center of the target
                 this.updatePosition(livingHitEntity.getX(), livingHitEntity.getBodyY(0.5), livingHitEntity.getZ());
 
-                // Optional: Make the spear silent/invisible if desired
-                // this.setInvisible(true);
 
-                // The spear now remains inside the entity until detonated.
-                // The entity ID is already stored via the item code when spawned, so no discard here.
                 stuckEntity = livingHitEntity;
             }
 
             this.playSound(soundEvent, 1.0F, 1.0F);
         } else {
-            // If no damage dealt, just bounce off slightly
+
             this.setVelocity(this.getVelocity().multiply(-0.01D, -0.1D, -0.01D));
             this.playSound(soundEvent, 1.0F, 1.0F);
         }
@@ -138,6 +130,12 @@ public class DraupnirSpearEntity extends PersistentProjectileEntity implements G
     @Override
     public void tick() {
         super.tick();
+
+        if (this.age > ConfigConstructor.draupnir_spear_max_age) {
+            this.remove(RemovalReason.DISCARDED);
+            return;
+        }
+
         if (this.isNoClip() && this.stuckEntity != null) {
             this.setPosition(stuckEntity.getX(), stuckEntity.getBodyY(0.5), stuckEntity.getZ());
             this.velocityDirty = true;
@@ -147,7 +145,7 @@ public class DraupnirSpearEntity extends PersistentProjectileEntity implements G
             double x = this.getX();
             double y = this.getY();
             double z = this.getZ();
-this.setInvisible(true);
+            this.setInvisible(true);
             this.setBoundingBox(new Box(
                     x - (width / 2), y,
                     z - (width / 2),
@@ -156,7 +154,6 @@ this.setInvisible(true);
             ));
         }
     }
-
 
     @Override
     protected ItemStack asItemStack() {

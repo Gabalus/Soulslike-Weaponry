@@ -387,11 +387,8 @@ public class ConfigConstructor extends MidnightConfig {
     @Entry public static float draupnir_spear_projectile_damage = 10f;
     @Entry public static float draupnir_spear_detonate_power = 1f;
     @Entry public static int draupnir_spear_throw_cooldown = 40;
-    @Entry public static int draupnir_spear_throw_min_cooldown = 10;
     @Entry public static int draupnir_spear_detonate_cooldown = 100;
-    @Entry public static int draupnir_spear_detonate_min_cooldown = 40;
     @Entry public static int draupnir_spear_summon_spears_cooldown = 300;
-    @Entry public static int draupnir_spear_summon_spears_min_cooldown = 80;
     @Entry public static boolean draupnir_spear_enchant_reduces_throw_cooldown = true;
     @Entry public static String draupnir_spear_enchant_reduces_throw_cooldown_id = "damage";
     @Entry public static boolean draupnir_spear_enchant_reduces_ability_cooldown = false;
